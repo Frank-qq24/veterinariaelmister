@@ -7,7 +7,7 @@
 			session_regenerate_id(true);
 			if(isset($_SESSION['login']))
 			{
-				header('Location: '.base_url().'/dashboard');
+				header('Location: '.base_url().'/inicio');
 				die();
 			}
 			parent::__construct();
@@ -29,7 +29,9 @@
 					$arrResponse = array('status' => false, 'msg' => 'Error de datos' );
 				}else{
 					$strUsuario  =  strtolower(strClean($_POST['txtEmail']));
+					// estamos encriptando el password 
 					$strPassword = hash("SHA256",$_POST['txtPassword']);
+					//lo que nos retorna el lgoginuser en el modelo
 					$requestUser = $this->model->loginUser($strUsuario, $strPassword);
 					if(empty($requestUser)){
 						$arrResponse = array('status' => false, 'msg' => 'El usuario o la contraseña es incorrecto.' ); 

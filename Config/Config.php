@@ -1,6 +1,6 @@
 <?php 
 	
-	//define("BASE_URL", "http://localhost/veterinaria/");
+	//define("BASE_URL", "http://localhost/veterinaria2/");
 	const BASE_URL = "http://localhost/veterinariaelmister";
 
 	//Zona horaria

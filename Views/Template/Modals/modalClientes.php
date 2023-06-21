@@ -3,14 +3,14 @@
   <div class="modal-dialog modal-lg" >
     <div class="modal-content">
       <div class="modal-header headerRegister">
-        <h5 class="modal-title" id="titleModal">Nuevo Usuario</h5>
+        <h5 class="modal-title" id="titleModal">Nuevo Cliente</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
             <form id="formCliente" name="formCliente" class="form-horizontal">
-              <input type="hidden" id="idUsuario" name="idUsuario" value="">
+              <input type="hidden" id="idCliente" name="idCliente" value="" >
               <p class="text-primary">Los campos con asterisco (<span class="required">*</span>) son obligatorios.</p>
 
               <div class="form-row">
@@ -28,36 +28,26 @@
                 </div>
               </div>
               <div class="form-row">
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-6">
                   <label for="txtTelefono">Teléfono <span class="required">*</span></label>
                   <input type="text" class="form-control valid validNumber" id="txtTelefono" name="txtTelefono" required="" onkeypress="return controlTag(event);">
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-6">
                   <label for="txtEmail">Email <span class="required">*</span></label>
                   <input type="email" class="form-control valid validEmail" id="txtEmail" name="txtEmail" required="">
                 </div>
-                <div class="form-group col-md-4">
-                  <label for="txtPassword">Red Social </label>
-                  <input type="text" class="form-control" id="txtPassword" name="txtPassword" >
-                </div>
               </div>
               <hr>
-              <p class="text-primary">Ubicación.</p>
               <div class="form-row">
                 <div class="form-group col-md-6">
-                  <label>Distrito <span class="required">*</span></label>
-                  <input class="form-control" type="text" id="txtNit" name="txtNit" required="">
-                </div>
-                <div class="form-group col-md-6">
-                  <label>Av. / Calle <span class="required">*</span></label>
-                  <input class="form-control" type="text" id="txtNombreFiscal" name="txtNombreFiscal" required="">
-                </div>
-
-                <div class="form-group col-md-12">
-                  <label>Descripción<span class="required">*</span></label>
-                  <input class="form-control" type="text" id="txtDirFiscal" name="txtDirFiscal" required="">
+                  <label>Dirección <span class="required">*</span></label>
+                  <textarea class="form-control" id="txtDireccion" name="txtDireccion"  rows="3"></textarea>
                 </div>
                 
+                <div class="form-group col-md-6">
+                  <label>Notas</span></label>
+                  <textarea class="form-control" id="txtNota" name="txtNota"  rows="3"></textarea>
+                </div>
               </div>
              <div class="form-row">
                 
@@ -102,20 +92,20 @@
               <td id="celTelefono">Larry</td>
             </tr>
             <tr>
-              <td>Email (Usuario):</td>
+              <td>Email (Cliente):</td>
               <td id="celEmail">Larry</td>
             </tr>
             <tr>
-              <td>Identificación Tributaria:</td>
-              <td id="celIde">Larry</td>
+              <td>Dirección</td>
+              <td id="celDireccion">Larry</td>
             </tr>
             <tr>
-              <td>Nombre Fiscal:</td>
-              <td id="celNomFiscal">Larry</td>
+              <td>Nota:</td>
+              <td id="celNota">Larry</td>
             </tr>
             <tr>
-              <td>Dirección Fiscal:</td>
-              <td id="celDirFiscal">Larry</td>
+              <td>Estado:</td>
+              <td id="celStatus">Larry</td>
             </tr>
             <tr>
               <td>Fecha registro:</td>
@@ -130,4 +120,3 @@
     </div>
   </div>
 </div>
-

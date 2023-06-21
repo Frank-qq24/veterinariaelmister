@@ -29,52 +29,53 @@ class Clientes extends Controllers{
 	public function setCliente(){
 		error_reporting(0);
 		if($_POST){
-			if(empty($_POST['txtIdentificacion']) || empty($_POST['txtNombre']) || empty($_POST['txtApellido']) || empty($_POST['txtTelefono']) || empty($_POST['txtEmail']) || empty($_POST['txtNit']) || empty($_POST['txtNombreFiscal']) || empty($_POST['txtDirFiscal']) )
+			if(empty($_POST['txtIdentificacion']) || empty($_POST['txtNombre']) || 
+			empty($_POST['txtApellido']) || empty($_POST['txtTelefono']) || 
+			empty($_POST['txtEmail']) || empty($_POST['txtDireccion']) || 
+			empty($_POST['txtNota']))
 			{
 				$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
 			}else{ 
-				$idUsuario = intval($_POST['idUsuario']);
+				$idCliente = intval($_POST['idCliente']);
 				$strIdentificacion = strClean($_POST['txtIdentificacion']);
 				$strNombre = ucwords(strClean($_POST['txtNombre']));
 				$strApellido = ucwords(strClean($_POST['txtApellido']));
 				$intTelefono = intval(strClean($_POST['txtTelefono']));
 				$strEmail = strtolower(strClean($_POST['txtEmail']));
-				$strNit = strClean($_POST['txtNit']);
-				$strNomFiscal = strClean($_POST['txtNombreFiscal']);
-				$strDirFiscal = strClean($_POST['txtDirFiscal']);
-				$intTipoId = 7;
+				$strDireccion = ucwords(strClean($_POST['txtDireccion']));
+				$strNota = ucwords(strClean($_POST['txtNota']));
+				$intStatus = 1;
+				$intPersonaid = intval($_SESSION['userData']['idpersona']);
+				$strPassword = ""; //puesto por mientras hasta que lo saque
 				$request_user = "";
-				if($idUsuario == 0)
+				if($idCliente == 0)
 				{
 					$option = 1;
-					$strPassword =  empty($_POST['txtPassword']) ? passGenerator() : $_POST['txtPassword'];
-					$strPasswordEncript = hash("SHA256",$strPassword);
 					if($_SESSION['permisosMod']['w']){
 						$request_user = $this->model->insertCliente($strIdentificacion,
 																			$strNombre, 
 																			$strApellido, 
 																			$intTelefono, 
 																			$strEmail,
-																			$strPasswordEncript,
-																			$intTipoId, 
-																			$strNit,
-																			$strNomFiscal,
-																			$strDirFiscal );
+																			$strDireccion, 
+																			$strNota,
+																			$intPersonaid,
+																			$intStatus 
+																		);
 					}
 				}else{
 					$option = 2;
-					$strPassword =  empty($_POST['txtPassword']) ? "" : hash("SHA256",$_POST['txtPassword']);
 					if($_SESSION['permisosMod']['u']){
-						$request_user = $this->model->updateCliente($idUsuario,
-																	$strIdentificacion, 
-																	$strNombre,
-																	$strApellido, 
-																	$intTelefono, 
-																	$strEmail,
-																	$strPassword, 
-																	$strNit,
-																	$strNomFiscal, 
-																	$strDirFiscal);
+						$request_user = $this->model->updateCliente($idCliente,
+																			$strIdentificacion,
+																			$strNombre, 
+																			$strApellido, 
+																			$intTelefono, 
+																			$strEmail,
+																			$strDireccion, 
+																			$strNota,
+																			$intPersonaid,
+																			$intStatus);
 					}
 				}
 
@@ -82,12 +83,6 @@ class Clientes extends Controllers{
 				{
 					if($option == 1){
 						$arrResponse = array('status' => true, 'msg' => 'Datos guardados correctamente.');
-						$nombreUsuario = $strNombre.' '.$strApellido;
-						$dataUsuario = array('nombreUsuario' => $nombreUsuario,
-											 'email' => $strEmail,
-											 'password' => $strPassword,
-											 'asunto' => 'Bienvenido a tu tienda en línea');
-						sendEmail($dataUsuario,'email_bienvenida');
 					}else{
 						$arrResponse = array('status' => true, 'msg' => 'Datos Actualizados correctamente.');
 					}
@@ -111,13 +106,13 @@ class Clientes extends Controllers{
 				$btnEdit = '';
 				$btnDelete = '';
 				if($_SESSION['permisosMod']['r']){
-					$btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo('.$arrData[$i]['idpersona'].')" title="Ver cliente"><i class="far fa-eye"></i></button>';
+					$btnView = '<button class="btn btn-info btn-sm" onClick="fntViewInfo('.$arrData[$i]['idcliente'].')" title="Ver cliente"><i class="far fa-eye"></i></button>';
 				}
 				if($_SESSION['permisosMod']['u']){
-					$btnEdit = '<button class="btn btn-primary  btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['idpersona'].')" title="Editar cliente"><i class="fas fa-pencil-alt"></i></button>';
+					$btnEdit = '<button class="btn btn-primary  btn-sm" onClick="fntEditInfo(this,'.$arrData[$i]['idcliente'].')" title="Editar cliente"><i class="fas fa-pencil-alt"></i></button>';
 				}
 				if($_SESSION['permisosMod']['d']){	
-					$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['idpersona'].')" title="Eliminar cliente"><i class="far fa-trash-alt"></i></button>';
+					$btnDelete = '<button class="btn btn-danger btn-sm" onClick="fntDelInfo('.$arrData[$i]['idcliente'].')" title="Eliminar cliente"><i class="far fa-trash-alt"></i></button>';
 				}
 				$arrData[$i]['options'] = '<div class="text-center">'.$btnView.' '.$btnEdit.' '.$btnDelete.'</div>';
 			}
@@ -128,10 +123,10 @@ class Clientes extends Controllers{
 
 	public function getCliente($idpersona){
 		if($_SESSION['permisosMod']['r']){
-			$idusuario = intval($idpersona);
-			if($idusuario > 0)
+			$idcliente = intval($idpersona);
+			if($idcliente > 0)
 			{
-				$arrData = $this->model->selectCliente($idusuario);
+				$arrData = $this->model->selectCliente($idcliente);
 				if(empty($arrData))
 				{
 					$arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
@@ -148,7 +143,7 @@ class Clientes extends Controllers{
 	{
 		if($_POST){
 			if($_SESSION['permisosMod']['d']){
-				$intIdpersona = intval($_POST['idUsuario']);
+				$intIdpersona = intval($_POST['idCliente']);
 				$requestDelete = $this->model->deleteCliente($intIdpersona);
 				if($requestDelete)
 				{
@@ -161,9 +156,5 @@ class Clientes extends Controllers{
 		}
 		die();
 	}
-
-
-
 }
-
 ?>

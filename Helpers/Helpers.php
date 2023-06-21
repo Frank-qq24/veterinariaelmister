@@ -23,9 +23,7 @@
 	//Muestra información formateada
 	function dep($data)
     {
-        $format  = print_r('<pre>');
-        $format .= print_r($data);
-        $format .= print_r('</pre>');
+        $format = print_r($data);
         return $format;
     }
     function getModal(string $nameModal, $data)
@@ -147,6 +145,4 @@
         $cantidad = number_format($cantidad,2,SPD,SPM);
         return $cantidad;
     }
-    
-
  ?>

@@ -27,6 +27,7 @@
 		public function sessionLogin(int $iduser){
 			$this->intIdUsuario = $iduser;
 			//BUSCAR ROLE 
+			// inter join para buscar en mas de dos tablas
 			$sql = "SELECT p.idpersona,
 							p.identificacion,
 							p.nombres,
@@ -43,6 +44,7 @@
 					ON p.rolid = r.idrol
 					WHERE p.idpersona = $this->intIdUsuario";
 			$request = $this->select($sql);
+			// guarda los datos del usuario en sesion
 			$_SESSION['userData'] = $request;
 			return $request;
 		}

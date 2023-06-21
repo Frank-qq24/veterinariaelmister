@@ -1,6 +1,8 @@
 let tableClientes; 
 let rowTable = "";
 let divLoading = document.querySelector("#divLoading");
+
+// se agregan los eventos al momento de cargar el documento
 document.addEventListener('DOMContentLoaded', function(){
 
     tableClientes = $('#tableClientes').dataTable( {
@@ -14,11 +16,11 @@ document.addEventListener('DOMContentLoaded', function(){
             "dataSrc":""
         },
         "columns":[
-            {"data":"idpersona"},
+            {"data":"idcliente"},
             {"data":"identificacion"},
             {"data":"nombres"},
             {"data":"apellidos"},
-            {"data":"email_user"},
+            {"data":"email_cliente"},
             {"data":"telefono"},
             {"data":"options"}
         ],
@@ -52,26 +54,28 @@ document.addEventListener('DOMContentLoaded', function(){
         "order":[[0,"desc"]]  
     });
 
+    //valida la existencia de este formulario
 	if(document.querySelector("#formCliente")){
         let formCliente = document.querySelector("#formCliente");
+
         formCliente.onsubmit = function(e) {
             e.preventDefault();
+            // capturo los valores enviados desde el formulario
             let strIdentificacion = document.querySelector('#txtIdentificacion').value;
             let strNombre = document.querySelector('#txtNombre').value;
             let strApellido = document.querySelector('#txtApellido').value;
             let strEmail = document.querySelector('#txtEmail').value;
             let intTelefono = document.querySelector('#txtTelefono').value;
-            let strNit = document.querySelector('#txtNit').value;
-            let strNomFical = document.querySelector('#txtNombreFiscal').value;
-            let strDirFiscal = document.querySelector('#txtDirFiscal').value;
-            let strPassword = document.querySelector('#txtPassword').value;
-
-            if(strIdentificacion == '' || strApellido == '' || strNombre == '' || strEmail == '' || intTelefono == '' || strNit == '' || strDirFiscal == '' || strNomFical=='' )
+            let strDireccion = document.querySelector('#txtDireccion').value;
+            let srtNota = document.querySelector('#txtNota').value;
+            
+            // verifico que algunos campos no esten vacios
+            if(strIdentificacion == '' || strApellido == '' || strNombre == '' || strEmail == '' || intTelefono == '' || strDireccion == '' || srtNota == '')
             {
                 swal("Atención", "Todos los campos son obligatorios." , "error");
                 return false;
             }
-
+            // verifica en el css el valid en los campos del del formulario
             let elementsValid = document.getElementsByClassName("valid");
             for (let i = 0; i < elementsValid.length; i++) { 
                 if(elementsValid[i].classList.contains('is-invalid')) { 
@@ -79,9 +83,11 @@ document.addEventListener('DOMContentLoaded', function(){
                     return false;
                 } 
             } 
+
             divLoading.style.display = "flex";
+            //se envian los datos por medio de ajax
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-            let ajaxUrl = base_url+'/Clientes/setCliente'; 
+            let ajaxUrl = base_url+'/Clientes/setCliente'; // lo envia esta dirección
             let formData = new FormData(formCliente);
             request.open("POST",ajaxUrl,true);
             request.send(formData);
@@ -100,9 +106,11 @@ document.addEventListener('DOMContentLoaded', function(){
                            rowTable.cells[5].textContent =  intTelefono;
                            rowTable = "";
                         }
+                        // oculta el formulario 
                         $('#modalFormCliente').modal("hide");
+                        // resetea el formulario
                         formCliente.reset();
-                        swal("Usuarios", objData.msg ,"success");
+                        swal("Clientes", objData.msg ,"success");
                     }else{
                         swal("Error", objData.msg , "error");
                     }
@@ -112,14 +120,11 @@ document.addEventListener('DOMContentLoaded', function(){
             }
         }
     }
-
-
 }, false);
 
-
-function fntViewInfo(idpersona){
+function fntViewInfo(idcliente){
     let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url+'/Clientes/getCliente/'+idpersona;
+    let ajaxUrl = base_url+'/Clientes/getCliente/'+idcliente;
     request.open("GET",ajaxUrl,true);
     request.send();
     request.onreadystatechange = function(){
@@ -131,10 +136,12 @@ function fntViewInfo(idpersona){
                 document.querySelector("#celNombre").innerHTML = objData.data.nombres;
                 document.querySelector("#celApellido").innerHTML = objData.data.apellidos;
                 document.querySelector("#celTelefono").innerHTML = objData.data.telefono;
-                document.querySelector("#celEmail").innerHTML = objData.data.email_user;
-                document.querySelector("#celIde").innerHTML = objData.data.nit;
-                document.querySelector("#celNomFiscal").innerHTML = objData.data.nombrefiscal;
-                document.querySelector("#celDirFiscal").innerHTML = objData.data.direccionfiscal;
+                document.querySelector("#celEmail").innerHTML = objData.data.email_cliente;
+                document.querySelector("#celDireccion").innerHTML = objData.data.direccion;
+                document.querySelector("#celNota").innerHTML = objData.data.nota;
+                $srtEstado = "Inactivo";
+                if(objData.data.status == 1){$srtEstado = "Activo"}; 
+                document.querySelector("#celStatus").innerHTML = $srtEstado;
                 document.querySelector("#celFechaRegistro").innerHTML = objData.data.fechaRegistro; 
                 $('#modalViewCliente').modal('show');
             }else{
@@ -144,38 +151,7 @@ function fntViewInfo(idpersona){
     }
 }
 
-function fntEditInfo(element, idpersona){
-    rowTable = element.parentNode.parentNode.parentNode;
-    document.querySelector('#titleModal').innerHTML ="Actualizar Cliente";
-    document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
-    document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");
-    document.querySelector('#btnText').innerHTML ="Actualizar";
-    let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    let ajaxUrl = base_url+'/Clientes/getCliente/'+idpersona;
-    request.open("GET",ajaxUrl,true);
-    request.send();
-    request.onreadystatechange = function(){
-
-        if(request.readyState == 4 && request.status == 200){
-            let objData = JSON.parse(request.responseText);
-            if(objData.status)
-            {
-                document.querySelector("#idUsuario").value = objData.data.idpersona;
-                document.querySelector("#txtIdentificacion").value = objData.data.identificacion;
-                document.querySelector("#txtNombre").value = objData.data.nombres;
-                document.querySelector("#txtApellido").value = objData.data.apellidos;
-                document.querySelector("#txtTelefono").value = objData.data.telefono;
-                document.querySelector("#txtEmail").value = objData.data.email_user;
-                document.querySelector("#txtNit").value =objData.data.nit;
-                document.querySelector("#txtNombreFiscal").value =objData.data.nombrefiscal;
-                document.querySelector("#txtDirFiscal").value =objData.data.direccionfiscal;
-            }
-        }
-        $('#modalFormCliente').modal('show');
-    }
-}
-
-function fntDelInfo(idpersona){
+function fntDelInfo(idcliente){
     swal({
         title: "Eliminar Cliente",
         text: "¿Realmente quiere eliminar al cliente?",
@@ -191,7 +167,7 @@ function fntDelInfo(idpersona){
         {
             let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
             let ajaxUrl = base_url+'/Clientes/delCliente';
-            let strData = "idUsuario="+idpersona;
+            let strData = "idCliente="+idcliente;
             request.open("POST",ajaxUrl,true);
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             request.send(strData);
@@ -210,13 +186,42 @@ function fntDelInfo(idpersona){
         }
 
     });
+}
 
+function fntEditInfo(element, idcliente){
+    rowTable = element.parentNode.parentNode.parentNode;
+    document.querySelector('#titleModal').innerHTML ="Actualizar Cliente";
+    document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
+    document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");
+    document.querySelector('#btnText').innerHTML ="Actualizar";
+    let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let ajaxUrl = base_url+'/Clientes/getCliente/'+idcliente;
+    request.open("GET",ajaxUrl,true);
+    request.send();
+    request.onreadystatechange = function(){
+
+        if(request.readyState == 4 && request.status == 200){
+            let objData = JSON.parse(request.responseText);
+            if(objData.status)
+            {
+                document.querySelector("#idCliente").value = objData.data.idcliente;
+                document.querySelector("#txtIdentificacion").value = objData.data.identificacion;
+                document.querySelector("#txtNombre").value = objData.data.nombres;
+                document.querySelector("#txtApellido").value = objData.data.apellidos;
+                document.querySelector("#txtTelefono").value = objData.data.telefono;
+                document.querySelector("#txtEmail").value = objData.data.email_cliente;
+                document.querySelector("#txtDireccion").value =objData.data.direccion;
+                document.querySelector("#txtNota").value =objData.data.nota;
+            }
+        }
+        $('#modalFormCliente').modal('show');
+    }
 }
 
 function openModal()
 {
     rowTable = "";
-    document.querySelector('#idUsuario').value ="";
+    document.querySelector('#idCliente').value ="";
     document.querySelector('.modal-header').classList.replace("headerUpdate", "headerRegister");
     document.querySelector('#btnActionForm').classList.replace("btn-info", "btn-primary");
     document.querySelector('#btnText').innerHTML ="Guardar";

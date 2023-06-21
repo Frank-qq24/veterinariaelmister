@@ -13,7 +13,7 @@
     <div class="col-md-12">
       <div class="tile">
         <div class="tile-body">Dashboard en construcción</div>
-        <div class="card">
+        <div class="card ">
           <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
               <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>

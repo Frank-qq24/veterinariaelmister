@@ -2,6 +2,13 @@
 <html>
 <head>
   <title>Veterinaria el mister</title>
+  <meta charset="utf-8">
+    <meta name="description" content="Veterinaria El Mister">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="FESCHE">
+    <meta name="theme-color" content="#009688">
+    <link rel="shortcut icon" href="Assets/images/icon_logo.svg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <style>
     /* Estilos para centrar el contenido */
@@ -85,7 +92,7 @@
   
   <div class="button-container">
     <a href="https://sites.google.com/untels.edu.pe/veterinaria-el-mister-blog?usp=sharing" class="button">Ver Blog</a>
-    <a href="http://localhost/elmistersanbartolo/login" class="button">Iniciar Sistema</a>
+    <a href="http://localhost/veterinariaelmister/login" class="button">Iniciar Sistema</a>
   </div>
 </body>
 </html>

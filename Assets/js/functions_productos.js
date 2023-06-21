@@ -4,7 +4,7 @@ let rowTable = "";
 
 $(document).on('focusin', function(e) {
     if ($(e.target).closest(".tox-dialog").length) {
-        e.stopImmediateProp agation();
+        e.stopImmediatePropagation();
     }
 });
 
