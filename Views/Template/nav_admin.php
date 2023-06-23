@@ -19,7 +19,7 @@
             <?php if (!empty($_SESSION['permisos'][2]['r'])) { ?>
                 <li class="treeview">
                     <a class="app-menu__item" href="#" data-toggle="treeview">
-                        <i class="app-menu__icon fa fa-users" aria-hidden="true"></i>
+                        <i class="app-menu__icon fa fa-user-tie" aria-hidden="true"></i>
                         <span class="app-menu__label">Usuarios</span>
                         <i class="treeview-indicator fa fa-angle-right"></i>
                     </a>
@@ -40,7 +40,7 @@
             <?php if (!empty($_SESSION['permisos'][3]['r'])) { ?>
                 <li>
                     <a class="app-menu__item" href="<?= base_url(); ?>/mascotas">
-                        <i class="app-menu__icon fa fa-users" aria-hidden="true"></i>
+                        <i class="app-menu__icon fa fa-paw" aria-hidden="true"></i>
                         <span class="app-menu__label">Mascotas</span>
                     </a>
                 </li>
