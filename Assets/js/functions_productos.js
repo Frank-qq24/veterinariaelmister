@@ -435,5 +435,4 @@ function openModal()
     document.querySelector("#containerGallery").classList.add("notblock");
     document.querySelector("#containerImages").innerHTML = "";
     $('#modalFormProductos').modal('show');
-
 }

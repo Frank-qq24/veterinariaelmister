@@ -36,16 +36,20 @@ class Clientes extends Controllers{
 			{
 				$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
 			}else{ 
+				
+				$intPersonaid = intval($_SESSION['userData']['idpersona']);
+				$nombrePersona = strClean($_SESSION['userData']['nombres']." ".$_SESSION['userData']['apellidos']);
+
 				$idCliente = intval($_POST['idCliente']);
 				$strIdentificacion = strClean($_POST['txtIdentificacion']);
 				$strNombre = ucwords(strClean($_POST['txtNombre']));
 				$strApellido = ucwords(strClean($_POST['txtApellido']));
 				$intTelefono = intval(strClean($_POST['txtTelefono']));
 				$strEmail = strtolower(strClean($_POST['txtEmail']));
-				$strDireccion = ucwords(strClean($_POST['txtDireccion']));
-				$strNota = ucwords(strClean($_POST['txtNota']));
+				$strDireccion = strClean($_POST['txtDireccion']);
+				$strNota = strClean($_POST['txtNota']);
 				$intStatus = 1;
-				$intPersonaid = intval($_SESSION['userData']['idpersona']);
+
 				$strPassword = ""; //puesto por mientras hasta que lo saque
 				$request_user = "";
 				if($idCliente == 0)
@@ -62,6 +66,7 @@ class Clientes extends Controllers{
 																			$intPersonaid,
 																			$intStatus 
 																		);
+						$request_registro = $this->model->setRegistro($nombrePersona, "Cliente", "Crear", $request_user , $intPersonaid);
 					}
 				}else{
 					$option = 2;
@@ -76,6 +81,7 @@ class Clientes extends Controllers{
 																			$strNota,
 																			$intPersonaid,
 																			$intStatus);
+						$request_registro = $this->model->setRegistro($nombrePersona, "Cliente", "Modificar", $idCliente , $intPersonaid);
 					}
 				}
 
@@ -143,10 +149,14 @@ class Clientes extends Controllers{
 	{
 		if($_POST){
 			if($_SESSION['permisosMod']['d']){
+				$intPersonaid = intval($_SESSION['userData']['idpersona']);
+				$nombrePersona = strClean($_SESSION['userData']['nombres']." ".$_SESSION['userData']['apellidos']);
+				
 				$intIdpersona = intval($_POST['idCliente']);
 				$requestDelete = $this->model->deleteCliente($intIdpersona);
 				if($requestDelete)
 				{
+					$request_registro = $this->model->setRegistro($nombrePersona, "Cliente", "Eliminar", $intIdpersona , $intPersonaid);
 					$arrResponse = array('status' => true, 'msg' => 'Se ha eliminado el cliente');
 				}else{
 					$arrResponse = array('status' => false, 'msg' => 'Error al eliminar al cliente.');

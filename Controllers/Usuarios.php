@@ -32,6 +32,10 @@
 				{
 					$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
 				}else{ 
+
+					$intPersonaid = intval($_SESSION['userData']['idpersona']);
+					$nombrePersona = strClean($_SESSION['userData']['nombres']." ".$_SESSION['userData']['apellidos']);
+
 					$idUsuario = intval($_POST['idUsuario']);
 					$strIdentificacion = strClean($_POST['txtIdentificacion']);
 					$strNombre = ucwords(strClean($_POST['txtNombre']));
@@ -55,6 +59,7 @@
 																				$strPassword, 
 																				$intTipoId, 
 																				$intStatus );
+							$request_registro = $this->model->setRegistro($nombrePersona, "Usuarios", "Crear", $request_user , $intPersonaid);													
 						}
 					}else{
 						$option = 2;
@@ -69,6 +74,7 @@
 																		$strPassword, 
 																		$intTipoId, 
 																		$intStatus);
+							$request_registro = $this->model->setRegistro($nombrePersona, "Usuarios", "Modificar", $idUsuario , $intPersonaid);
 						}
 
 					}
@@ -157,11 +163,15 @@
 		{
 			if($_POST){
 				if($_SESSION['permisosMod']['d']){
+					$intPersonaid = intval($_SESSION['userData']['idpersona']);
+					$nombrePersona = strClean($_SESSION['userData']['nombres']." ".$_SESSION['userData']['apellidos']);
+
 					$intIdpersona = intval($_POST['idUsuario']);
 					$requestDelete = $this->model->deleteUsuario($intIdpersona);
 					if($requestDelete)
 					{
 						$arrResponse = array('status' => true, 'msg' => 'Se ha eliminado el usuario');
+						$request_registro = $this->model->setRegistro($nombrePersona, "Usuarios", "Eliminar", $intIdpersona , $intPersonaid);
 					}else{
 						$arrResponse = array('status' => false, 'msg' => 'Error al eliminar el usuario.');
 					}

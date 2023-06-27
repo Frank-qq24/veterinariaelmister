@@ -32,6 +32,9 @@
 					$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
 				}else{
 					
+				$intPersonaid = intval($_SESSION['userData']['idpersona']);
+				$nombrePersona = strClean($_SESSION['userData']['nombres']." ".$_SESSION['userData']['apellidos']);
+
 					$intIdcategoria = intval($_POST['idCategoria']);
 					$strCategoria =  strClean($_POST['txtNombre']);
 					$strDescipcion = strClean($_POST['txtDescripcion']);
@@ -53,6 +56,7 @@
 						if($_SESSION['permisosMod']['w']){
 							$request_cateria = $this->model->inserCategoria($strCategoria, $strDescipcion,$imgPortada,$intStatus);
 							$option = 1;
+							$request_registro = $this->model->setRegistro($nombrePersona, "Categoria", "Crear", $request_cateria , $intPersonaid);
 						}
 					}else{
 						//Actualizar
@@ -64,6 +68,7 @@
 							}
 							$request_cateria = $this->model->updateCategoria($intIdcategoria,$strCategoria, $strDescipcion,$imgPortada,$intStatus);
 							$option = 2;
+							$request_registro = $this->model->setRegistro($nombrePersona, "Categoria", "Modificar", $intIdcategoria , $intPersonaid);
 						}
 					}
 					if($request_cateria > 0 )
@@ -148,11 +153,15 @@
 		{
 			if($_POST){
 				if($_SESSION['permisosMod']['d']){
+					$intPersonaid = intval($_SESSION['userData']['idpersona']);
+					$nombrePersona = strClean($_SESSION['userData']['nombres']." ".$_SESSION['userData']['apellidos']);
+				
 					$intIdcategoria = intval($_POST['idCategoria']);
 					$requestDelete = $this->model->deleteCategoria($intIdcategoria);
 					if($requestDelete == 'ok')
 					{
 						$arrResponse = array('status' => true, 'msg' => 'Se ha eliminado la categoría');
+						$request_registro = $this->model->setRegistro($nombrePersona, "Categoria", "Eliminar", $intIdcategoria , $intPersonaid);
 					}else if($requestDelete == 'exist'){
 						$arrResponse = array('status' => false, 'msg' => 'No es posible eliminar una categoría con productos asociados.');
 					}else{
@@ -179,6 +188,4 @@
 		}
 
 	}
-
-
  ?>

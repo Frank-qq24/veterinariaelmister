@@ -65,6 +65,9 @@
 					$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
 				}else{
 					
+				$intPersonaid = intval($_SESSION['userData']['idpersona']);
+				$nombrePersona = strClean($_SESSION['userData']['nombres']." ".$_SESSION['userData']['apellidos']);
+
 					$idProducto = intval($_POST['idProducto']);
 					$strNombre = strClean($_POST['txtNombre']);
 					$strDescripcion = strClean($_POST['txtDescripcion']);
@@ -86,6 +89,7 @@
 																		$strPrecio, 
 																		$intStock, 
 																		$intStatus );
+							$request_registro = $this->model->setRegistro($nombrePersona, "Productos", "Crear", $request_producto , $intPersonaid);											
 						}
 					}else{
 						$option = 2;
@@ -98,6 +102,7 @@
 																		$strPrecio, 
 																		$intStock, 
 																		$intStatus);
+							$request_registro = $this->model->setRegistro($nombrePersona, "Productos", "Modificar", $idProducto , $intPersonaid);		
 						}
 					}
 					if($request_producto > 0 )
@@ -187,11 +192,15 @@
 		public function delProducto(){
 			if($_POST){
 				if($_SESSION['permisosMod']['d']){
+					$intPersonaid = intval($_SESSION['userData']['idpersona']);
+					$nombrePersona = strClean($_SESSION['userData']['nombres']." ".$_SESSION['userData']['apellidos']);
+				
 					$intIdproducto = intval($_POST['idProducto']);
 					$requestDelete = $this->model->deleteProducto($intIdproducto);
 					if($requestDelete)
 					{
 						$arrResponse = array('status' => true, 'msg' => 'Se ha eliminado el producto');
+						$request_registro = $this->model->setRegistro($nombrePersona, "Producto", "Eliminar", $intIdproducto , $intPersonaid);
 					}else{
 						$arrResponse = array('status' => false, 'msg' => 'Error al eliminar el producto.');
 					}
@@ -201,5 +210,4 @@
 			die();
 		}
 	}
-
  ?>

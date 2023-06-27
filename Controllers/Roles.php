@@ -95,6 +95,10 @@
 
 		public function setRol(){
 			if($_SESSION['permisosMod']['w']){
+
+				$intPersonaid = intval($_SESSION['userData']['idpersona']);
+				$nombrePersona = strClean($_SESSION['userData']['nombres']." ".$_SESSION['userData']['apellidos']);
+
 				$intIdrol = intval($_POST['idRol']);
 				$strRol =  strClean($_POST['txtNombre']);
 				$strDescipcion = strClean($_POST['txtDescripcion']);
@@ -105,10 +109,12 @@
 					//Crear
 					$request_rol = $this->model->insertRol($strRol, $strDescipcion,$intStatus);
 					$option = 1;
+					$request_registro = $this->model->setRegistro($nombrePersona, "Roles", "Crear", $request_rol , $intPersonaid);
 				}else{
 					//Actualizar
 					$request_rol = $this->model->updateRol($intIdrol, $strRol, $strDescipcion, $intStatus);
 					$option = 2;
+					$request_registro = $this->model->setRegistro($nombrePersona, "Roles", "Modificar", $request_rol , $intPersonaid);
 				}
 
 				if($request_rol > 0 )
@@ -134,11 +140,15 @@
 		{
 			if($_POST){
 				if($_SESSION['permisosMod']['d']){
+					$intPersonaid = intval($_SESSION['userData']['idpersona']);
+					$nombrePersona = strClean($_SESSION['userData']['nombres']." ".$_SESSION['userData']['apellidos']);
+				
 					$intIdrol = intval($_POST['idrol']);
 					$requestDelete = $this->model->deleteRol($intIdrol);
 					if($requestDelete == 'ok')
 					{
 						$arrResponse = array('status' => true, 'msg' => 'Se ha eliminado el Rol');
+						$request_registro = $this->model->setRegistro($nombrePersona, "Roles", "Eliminar", $intIdrol , $intPersonaid);
 					}else if($requestDelete == 'exist'){
 						$arrResponse = array('status' => false, 'msg' => 'No es posible eliminar un Rol asociado a usuarios.');
 					}else{

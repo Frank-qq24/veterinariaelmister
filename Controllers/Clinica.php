@@ -14,7 +14,7 @@
 			getPermisos(5);
 		}
 
-		public function dashboard()
+		public function clinica()
 		{
 			$data['page_id'] = 5;
 			$data['page_tag'] = "Clinica";

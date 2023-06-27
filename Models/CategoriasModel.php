@@ -100,7 +100,22 @@
 			}
 			return $request;
 		}	
-
-
+		// Para el registro de actividad, usuario es el que esta corriendo actualemente, es decir la persona logeada
+		private $IdUsuario;
+		private $NombreUsuario;
+		private $tabla;
+		private $Accion;
+		private	$idDAto; //viene ha ser el id del campo, Ejemplo idcliente, idproducto.
+		public function setRegistro( string $nombre_usu, string $nombre_tabla,string $accion,int $idDAto,int $idusu){
+			$this-> NombreUsuario = $nombre_usu;
+			$this-> tabla = $nombre_tabla;
+			$this-> Accion = $accion;
+			$this->	idDAto = $idDAto; 
+			$this-> IdUsuario = $idusu;
+			//`persona`, `tabla`, `accion`, `iddato`, `personaid`
+			$sql = "INSERT INTO `registro`(`persona`, `tabla`, `accion`, `iddato`, `personaid` ) VALUES (?,?,?,?,?)";
+			$arrRegis =array($this->NombreUsuario,$this->tabla,$this->Accion,$this->idDAto,$this->IdUsuario);
+			$registro = $this->insert($sql,$arrRegis);
+		}
 	}
  ?>

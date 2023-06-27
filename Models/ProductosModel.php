@@ -40,7 +40,7 @@
 			$this->strDescripcion = $descripcion;
 			$this->intCodigo = $codigo;
 			$this->intCategoriaId = $categoriaid;
-			$this->strPrecio = $precio;
+			$this->intPrecio = $precio;
 			$this->intStock = $stock;
 			$this->intStatus = $status;
 			$return = 0;
@@ -60,7 +60,7 @@
         						$this->intCodigo,
         						$this->strNombre,
         						$this->strDescripcion,
-        						$this->strPrecio,
+        						$this->intPrecio,
         						$this->intStock,
         						$this->intStatus);
 	        	$request_insert = $this->insert($query_insert,$arrData);
@@ -77,7 +77,7 @@
 			$this->strDescripcion = $descripcion;
 			$this->intCodigo = $codigo;
 			$this->intCategoriaId = $categoriaid;
-			$this->strPrecio = $precio;
+			$this->intPrecio = $precio;
 			$this->intStock = $stock;
 			$this->intStatus = $status;
 			$return = 0;
@@ -98,7 +98,7 @@
         						$this->intCodigo,
         						$this->strNombre,
         						$this->strDescripcion,
-        						$this->strPrecio,
+        						$this->intPrecio,
         						$this->intStock,
         						$this->intStatus);
 
@@ -165,6 +165,23 @@
 			$arrData = array(0);
 			$request = $this->update($sql,$arrData);
 			return $request;
+		}
+		// Para el registro de actividad, usuario es el que esta corriendo actualemente, es decir la persona logeada
+		private $IdUsuario;
+		private $NombreUsuario;
+		private $tabla;
+		private $Accion;
+		private	$idDAto; //viene ha ser el id del campo, Ejemplo idcliente, idproducto.
+		public function setRegistro( string $nombre_usu, string $nombre_tabla,string $accion,int $idDAto,int $idusu){
+			$this-> NombreUsuario = $nombre_usu;
+			$this-> tabla = $nombre_tabla;
+			$this-> Accion = $accion;
+			$this->	idDAto = $idDAto; 
+			$this-> IdUsuario = $idusu;
+			//`persona`, `tabla`, `accion`, `iddato`, `personaid`
+			$sql = "INSERT INTO `registro`(`persona`, `tabla`, `accion`, `iddato`, `personaid` ) VALUES (?,?,?,?,?)";
+			$arrRegis =array($this->NombreUsuario,$this->tabla,$this->Accion,$this->idDAto,$this->IdUsuario);
+			$registro = $this->insert($sql,$arrRegis);
 		}
 	}
  ?>
