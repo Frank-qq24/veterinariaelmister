@@ -55,6 +55,8 @@
                         
                     </a>
                     <ul class="treeview-menu">
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/proforma"><i class="icon fa fa-circle-o"></i> Proforma</a></li>
+                        <li><a class="treeview-item" href="<?= base_url(); ?>/comprobante"><i class="icon fa fa-circle-o"></i> Comprobante de Pago</a></li>
                         <?php if (!empty($_SESSION['permisos'][4]['r'])) { ?>
                             <li><a class="treeview-item" href="<?= base_url(); ?>/productos"><i class="icon fa fa-circle-o"></i> Productos</a></li>
                         <?php } ?>

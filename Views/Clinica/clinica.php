@@ -149,9 +149,24 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="tile ">
+                    <div class="tile">
                         <div class="tile-body">
-                            <h3>HOLA</h3>
+                            <h3>Peso</h3>
+                        </div>
+                    </div>
+                    <div class="tile">
+                        <div class="tile-body">
+                            <h3>Vacunas</h3>
+                        </div>
+                    </div>
+                    <div class="tile">
+                        <div class="tile-body">
+                            <h3>Cirugias</h3>
+                        </div>
+                    </div>
+                    <div class="tile">
+                        <div class="tile-body">
+                            <h3>Notas</h3>
                         </div>
                     </div>
                 </div>

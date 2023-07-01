@@ -5,7 +5,7 @@ class Clientes extends Controllers{
 	{
 		parent::__construct();
 		session_start();
-		session_regenerate_id(true);
+		// session_regenerate_id(true);
 		if(empty($_SESSION['login']))
 		{
 			header('Location: '.base_url().'/login');
@@ -165,6 +165,20 @@ class Clientes extends Controllers{
 			}
 		}
 		die();
+	}
+
+	public function getSelectClientes(){
+		$htmlOptions = "";
+		$arrData = $this->model->selectClientes();
+		if(count($arrData) > 0 ){
+			for ($i=0; $i < count($arrData); $i++) { 
+				if($arrData[$i]['status'] == 1 ){
+				$htmlOptions .= '<option value="'.$arrData[$i]['idcliente'].'">'.$arrData[$i]['nombres'].' '.$arrData[$i]['apellidos'].' - '.$arrData[$i]['identificacion'].'</option>';
+				}
+			}
+		}
+		echo $htmlOptions;
+		die();	
 	}
 }
 ?>

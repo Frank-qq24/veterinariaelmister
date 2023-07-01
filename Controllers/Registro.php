@@ -5,7 +5,7 @@
 		{
 			parent::__construct();
 			session_start();
-			session_regenerate_id(true);
+			// session_regenerate_id(true);
 			if(empty($_SESSION['login']))
 			{
 				header('Location: '.base_url().'/login');
@@ -28,6 +28,14 @@
 	    {
             if($_SESSION['permisosMod']['r']){
                 $arrData = $this->model->selectRegistros();
+				for ($i=0; $i < count($arrData); $i++) {
+					switch($arrData[$i]['accion']){
+						case 'Crear': $arrData[$i]['accion'] = '<span class="badge badge-success">'.$arrData[$i]['accion'].'</span>'; break;
+						case 'Modificar': $arrData[$i]['accion'] = '<span class="badge badge-warning">'.$arrData[$i]['accion'].'</span>'; break;
+						case 'Eliminar': $arrData[$i]['accion'] = '<span class="badge badge-danger">'.$arrData[$i]['accion'].'</span>'; break;
+					}
+					
+			   }
                 echo json_encode($arrData,JSON_UNESCAPED_UNICODE);
             }
             die();

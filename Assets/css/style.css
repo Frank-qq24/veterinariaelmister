@@ -61,31 +61,36 @@
 /* style portada categoría */
 .prevPhoto {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
     width: 300px;
     height: 200px;
     border: 1px solid #CCC;
     position: relative;
     cursor: pointer;
-    background: url(../images/uploads/portada_categoria.png);
+    background: url(../images/uploads/alter_pet.png);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
     margin: auto;
 }
-.prevPhoto label{
-	cursor: pointer;
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: 2;
+
+.prevPhoto label {
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
 }
-.prevPhoto img{
-	width: 100%;
-	height: 100%;
+
+.prevPhoto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
+
 .upimg, .notblock{
 	display: none !important;
 }
