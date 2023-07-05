@@ -11,6 +11,7 @@
 		private $intClienteID;
 		private $fileFoto;
 		private $intStatus;
+		private $intPersonaID;
 
 
 
@@ -108,6 +109,39 @@
 
 			$request = $this->update($sql,$arrData);
 			return $request;
+		}
+		public function selectMascotaOpc(int $clienteid){
+			$this->intClienteID = $clienteid;
+			$sql = "SELECT m.idmascota,m.nombre,m.especie,m.raza,m.sexo,m.fecha_nacimiento,
+					m.descripcion,m.status,m.foto, c.nombres as d_nombre, c.apellidos, c.identificacion,
+					c.telefono, c.email_cliente, c.direccion, c.idcliente
+			 		FROM mascotas m INNER JOIN cliente c ON m.clienteid = c.idcliente 
+					WHERE clienteid = $this->intClienteID";
+			$request = $this->select_all($sql);
+			return $request;
+		}
+		// historial clinico
+		//SELECT m.idmascota, m.nombre, m.especie, m.raza, m.sexo, m.fecha_nacimiento, c.nombres AS d_nombre, c.apellidos, c.identificacion, c.telefono, c.email_cliente, c.direccion, c.idcliente, h.idhistorial, h.datecreated FROM historial_clinico h INNER JOIN mascotas m ON m.idmascota = h.mascotaid INNER JOIN cliente c ON c.idcliente = m.clienteid WHERE m.idmascota = 1;
+
+		public function getIDHistorial(int $idmascota){
+			$this->intIdmascota = $idmascota;
+			$sql = "SELECT m.idmascota, m.nombre, m.especie, m.raza, m.sexo, m.fecha_nacimiento, 
+			c.nombres AS d_nombre, c.apellidos, c.identificacion, c.telefono, c.email_cliente, c.direccion, c.idcliente, 
+			h.idhistorial, h.datecreated FROM historial_clinico h 
+			INNER JOIN mascotas m ON m.idmascota = h.mascotaid 
+			INNER JOIN cliente c ON c.idcliente = m.clienteid 
+			WHERE m.idmascota = $this->intIdmascota";
+			$request = $this->select($sql);
+			return $request;
+		}
+		public function createhistorial(int $idmascota, int $personaid)
+		{
+			$this-> intIdmascota = $idmascota;
+			$this-> intPersonaID = $personaid;
+			$query_insert  = "INSERT INTO `historial_clinico`(`mascotaid`, `personaid`) VALUES(?,?)";
+			$arrData = array(	$this-> intIdmascota, $this-> intPersonaID);
+			$request = $this->insert($query_insert,$arrData);
+
 		}
 		// ====================================================================================================================
 		// Para el registro de actividad, usuario es el que esta corriendo actualemente, es decir la persona logeada

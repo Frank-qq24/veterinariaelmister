@@ -48,19 +48,19 @@
                 <div class="form-group col-md-4">
                   <label for="listEspecie">Especie<span class="required">*</span></label>
                   <select class="form-control selectpicker" data-live-search="true" id="listEspecie" name="listEspecie" required="">
+                    <option value="Serpiente">Serpiente</option>
                     <option value="Perro">Perro</option>
                     <option value="Gato">Gato</option>
                     <option value="Pájaro">Pájaro</option>
                     <option value="Conejo">Conejo</option>
                     <option value="Hámster">Hámster</option>
-                    <option value="Cobaya">Cobaya</option>
-                    <option value="Serpiente">Serpiente</option>
+                    <option value="Cuy">Cuy</option>
                     <option value="Lagarto">Lagarto</option>
                     <option value="Tortuga">Tortuga</option>
                     <option value="Pez">Pez</option>
                     <option value="Rana">Rana</option>
-                    <option value="Caballo">Caballo</option>
-                    <option value="Vaca">Vaca</option>
+                    <!-- <option value="Caballo">Caballo</option> -->
+                    <!-- <option value="Vaca">Vaca</option> -->
                     <option value="Cerdo">Cerdo</option>
                     <option value="Oveja">Oveja</option>
                     <option value="Otro">Otro</option>
@@ -107,7 +107,7 @@
 
           <div class="tile-footer">
             <button id="btnActionForm" class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText">Guardar</span></button>&nbsp;&nbsp;&nbsp;
-            <button class="btn btn-danger" type="button" data-dismiss="modal"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cerrar</button>
+            <button class="btn btn-danger" type="button" onclick="cleanModal();" data-dismiss="modal"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cerrar</button>
           </div>
 
         </form>
@@ -117,7 +117,7 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="modalAgregarCliente" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="ver" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header header-primary">
@@ -127,7 +127,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <iframe src="http://localhost/veterinariaelmister/clientes" width="100%" height="500" frameborder="1"></iframe>
+        <iframe src="<?= base_url(); ?>/clientes" width="100%" height="500" frameborder="1"></iframe>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>

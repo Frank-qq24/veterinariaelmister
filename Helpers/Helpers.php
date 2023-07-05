@@ -77,6 +77,13 @@
         $move = move_uploaded_file($url_temp, $destino);
         return $move;
     }
+    
+    function uploadPdf(array $data, string $name){
+        $url_temp = $data['tmp_name'];
+        $destino    = 'Assets/documents/uploads/'.$name;        
+        $move = move_uploaded_file($url_temp, $destino);
+        return $move;
+    }
 
     function deleteFile(string $name){
         unlink('Assets/images/uploads/'.$name);

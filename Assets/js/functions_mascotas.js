@@ -289,6 +289,8 @@ function openModal() {
     document.querySelector('#btnActionForm').classList.replace("btn-info", "btn-primary");
     document.querySelector('#btnText').innerHTML ="Guardar";
     document.querySelector('#titleModal').innerHTML = "Nuevo Mascota";
+    document.querySelector("#formMascotas").reset();
+    removePhoto();
     $("#modalFormMascotas").modal("show");
   }
 function openModal2() {

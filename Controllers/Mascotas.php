@@ -103,6 +103,7 @@
 					{
 						if($option == 1){
 							$request_registro = $this->model->setRegistro($nombrePersona, "Mascota", "Crear", $request_mascota , $intPersonaid);
+							$request_historial = $this->model->createhistorial($request_mascota, $intPersonaid);
 							$arrResponse = array('status' => true, 'msg' => 'Datos guardados correctamente.');
 							if($nombre_foto != ''){ uploadImage($foto,$imgPortada); }
 						}else{
@@ -193,6 +194,24 @@
 				}
 			}
 			die();
+		}
+		public function getIdHistorial($idmascota){
+			$arrData = $this->model->getIDHistorial($idmascota);
+			$arrResponse = array('status' => true, 'data' => $arrData);
+			echo json_encode($arrData,JSON_UNESCAPED_UNICODE);
+			die();
+		}
+		public function getSelectMascotas($idcliente){
+			$htmlOptions = "";
+			$arrData = $this->model->selectMascotaOpc($idcliente);
+			if(count($arrData) > 0 ){
+				$htmlOptions .= '<option value="" disabled="">Selecciona la Mascota</option>';
+				for ($i=0; $i < count($arrData); $i++) { 
+					$htmlOptions .= '<option value="'.$arrData[$i]['idmascota'].'">'.$arrData[$i]['nombre'].' - '.$arrData[$i]['especie'].' - '.$arrData[$i]['sexo'].'</option>';
+				}
+			}
+			echo $htmlOptions;
+			die();	
 		}
     }
 ?>

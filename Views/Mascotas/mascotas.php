@@ -54,37 +54,37 @@ getModal('modalMascotas', $data);
         <div class="tile-body">
           <ul class="nav nav-pills flex-column mail-nav">
             <li class="nav-item ">
-              <div class="nav-link" href="#"><i class="fa fa-github fa-fw"></i> Nombre: <strong><div id="txtMas_nombre"></div></div>
+              <div class="nav-link" href="#"><i class="fa fa-github fa-fw"></i> <strong>Nombre: </strong> <span id="txtMas_nombre" style="font-size:large;"></span></div>
             </li>
             <li class="nav-item">
-              <div class="nav-link" href="#"><i class="fa fa-braille fa-fw"></i> Especie: <div id="txtMas_especie"></div></div>
+              <div class="nav-link" href="#"><i class="fa fa-braille fa-fw"></i> <strong>Especie: </strong><span id="txtMas_especie" style="font-size:large;"></span></div>
             </li>
             <li class="nav-item">
-              <div class="nav-link" href="#"><i class="fa fa-venus-mars fa-fw"></i> Sexo: <div id="txtMas_sexo"></div></div>
+              <div class="nav-link" href="#"><i class="fa fa-venus-mars fa-fw"></i> <strong>Sexo: </strong><span id="txtMas_sexo" style="font-size:large;"></span></div>
             </li>
             <li class="nav-item">
-              <div class="nav-link" href="#"><i class="fa fa-circle fa-fw"></i> Raza: <div id="txtMas_raza"></div></div>
+              <div class="nav-link" href="#"><i class="fa fa-circle fa-fw"></i> <strong>Raza: </strong><span id="txtMas_raza" style="font-size:large;"></span></div>
             </li>
             <li class="nav-item">
-              <div class="nav-link" href="#"><i class="fa fa-birthday-cake fa-fw"></i> F. Nacimiento: <div id="txtMas_nacimiento"></div></div>
+              <div class="nav-link" href="#"><i class="fa fa-birthday-cake fa-fw"></i> <strong>F. Nacimiento: </strong><span id="txtMas_nacimiento" style="font-size:large;"></span></div>
             </li>
           </ul>
           <h5 class=" folder-head">Datos del Dueño</h5>
           <ul class="nav nav-pills flex-column mail-nav">
             <li class="nav-item ">
-              <div class="nav-link" href="#"><i class="fa fa-user-circle fa-fw"></i> Dueño: <div id="txtMas_dueño"></div></div>
+              <div class="nav-link" href="#"><i class="fa fa-user-circle fa-fw"></i> <strong>Dueño: </strong><span id="txtMas_dueño" style="font-size:large;"></span></div>
             </li>
             <li class="nav-item">
-              <div class="nav-link" href="#"><i class="fa fa-envelope-o fa-fw"></i> Email: <div id="txtMas_email"></div></div>
+              <div class="nav-link" href="#"><i class="fa fa-envelope-o fa-fw"></i> <strong>Email: </strong><span id="txtMas_email" style="font-size:large;"></span></div>
             </li>
             <li class="nav-item">
-              <div class="nav-link" href="#"><i class="fa fa-address-card fa-fw"></i> DNI: <div id="txtMas_dni"></div></div>
+              <div class="nav-link" href="#"><i class="fa fa-address-card fa-fw"></i> <strong>DNI: </strong><span id="txtMas_dni" style="font-size:large;"></span></div>
             </li>
             <li class="nav-item">
-              <div class="nav-link" href="#"><i class="fa fa-mobile fa-fw"></i> Tel: <div id="txtMas_telefono"></div></div>
+              <div class="nav-link" href="#"><i class="fa fa-mobile fa-fw"></i> <strong>Tel: </strong><span id="txtMas_telefono" style="font-size:large;"></span></div>
             </li>
             <li class="nav-item">
-              <div class="nav-link" href="#"><i class="fa fa-building fa-fw"></i> Dirección: <div id="txtMas_direccion"></div></div>
+              <div class="nav-link" href="#"><i class="fa fa-building fa-fw"></i> <strong>Dirección: </strong><span id="txtMas_direccion" style="font-size:large;"></span></div>
             </li>
           </ul>
         </div>
