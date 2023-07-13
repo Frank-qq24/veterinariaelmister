@@ -21,9 +21,11 @@
                     </div>
                 </div>
                 <div class="btn-group-vertical flex-column nav  -pills">
+                <?php if($_SESSION['permisosMod']['w']){ ?>
                     <button class="btn btn-primary btn-lg" type="button" onclick="openModalCosulta();" ><i class="fas fa-plus-circle"></i> Nueva Consulta</button>
                     <button class="btn btn-secondary btn-lg" type="button" onclick="openModalVacunacion();" ><i class="fas fa-plus-circle"></i> Nueva Vacunacion</button>
                     <button class="btn btn-warning btn-lg" type="button" onclick="openModalAnalisis();" ><i class="fas fa-plus-circle"></i> Nuevo Analisis</button>
+                <?php } ?>
                     <!-- <a href="<?= base_url(); ?>/clinica/historial" class="btn btn-secondary btn-lg"> Ver Historia Clinica</a> -->
                     <!-- <button type="button"  onclick="openModal1();" class="btn btn-info  btn-lg  ">Buscar Mascota</button>
                     <button type="button" onclick="openModal2();" class="btn btn-outline-warning btn-lg">Buscar Cliente</button> -->

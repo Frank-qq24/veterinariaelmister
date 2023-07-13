@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Kind Heart Charity - Free Bootstrap 5.2.2 CSS Template</title>
+    <title>Veterinaria el Mister</title>
     <link rel="shortcut icon" href="<?= media();?>/images/icon_logo.svg">
     <!-- CSS FILES -->
     <link href="<?= media(); ?>/home/css/bootstrap.min.css" rel="stylesheet">
@@ -86,7 +86,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link click-scroll" href="#top">Home</a>
+                        <a class="nav-link click-scroll" href="#top">Inicio</a>
                     </li>
 
                     <li class="nav-item">
@@ -104,12 +104,12 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link click-scroll dropdown-toggle" href="#section_5"
                             id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">News</a>
+                            aria-expanded="false">Vizualizar</a>
 
                         <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
-                            <li><a class="dropdown-item" href="news.html">News Listing</a></li>
+                            <li><a class="dropdown-item" href="news.html">Clientes</a></li>
 
-                            <li><a class="dropdown-item" href="news-detail.html">News Detail</a></li>
+                            <li><a class="dropdown-item" href="news-detail.html">Mascotas</a></li>
                         </ul>
                     </li>
 
@@ -244,7 +244,7 @@
                 <div class="row">
 
                     <div class="col-lg-6 col-12 mb-5 mb-lg-0">
-                        <img src="<?= media(); ?>/home/images/group-people-volunteering-foodbank-poor-people.jpg"
+                        <img src="<?= media(); ?>/home/images/media.png"
                             class="custom-text-box-image img-fluid" alt="">
                     </div>
 
@@ -252,29 +252,31 @@
                         <div class="custom-text-box">
                             <h2 class="mb-2">Nosotros</h2>
 
-                            <h5 class="mb-3">Veterinaria el Mister, Non-Profit Organization</h5>
+                            <h5 class="mb-3">El Mister, Veterinaria Clinica Animal</h5>
 
-                            <p class="mb-0">This is a Bootstrap 5.2.2 CSS template for charity organization websites.
-                                You can feel free to use it. Please tell your friends about TemplateMo website. Thank
-                                you.</p>
+                            <p class="mb-0 ">
+                                Bienvenidos a la veterinaria El Mister, una clínica especializada en la salud y bienestar de tus mascotas. 
+                                En nuestro centro encontrarás un equipo de profesionales altamente calificados y apasionados por la atención veterinaria, 
+                                que brindan un servicio integral para satisfacer las necesidades de tu amigo peludo.
+                            </p>
                         </div>
 
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-12">
                                 <div class="custom-text-box mb-lg-0">
-                                    <h5 class="mb-3">Our Mission</h5>
-
-                                    <p>Sed leo nisl, posuere at molestie ac, suscipit auctor quis metus</p>
+                                    <h5 class="mb-3">Nuestra Mision</h5>
+                                    
+                                    <p>Atención integral, personalizada y de alta calidad para la salud</p>
 
                                     <ul class="custom-list mt-2">
                                         <li class="custom-list-item d-flex">
                                             <i class="bi-check custom-text-box-icon me-2"></i>
-                                            Charity Theme
+                                            Bienestar 
                                         </li>
 
                                         <li class="custom-list-item d-flex">
                                             <i class="bi-check custom-text-box-icon me-2"></i>
-                                            Semantic HTML
+                                            Salud
                                         </li>
                                     </ul>
                                 </div>
@@ -296,7 +298,7 @@
                                         <div class="d-flex">
                                             <span class="counter-number" data-from="1" data-to="120"
                                                 data-speed="1000"></span>
-                                            <span class="counter-number-text">B</span>
+                                            <span class="counter-number-text">c</span>
                                         </div>
 
                                         <span class="counter-text">Clientes</span>
@@ -322,9 +324,9 @@
 
                     <div class="col-lg-5 col-md-7 col-12">
                         <div class="custom-text-block">
-                            <h2 class="mb-0">Sandy Chan</h2>
+                            <h2 class="mb-0">Mervin De La Flor Enciso</h2>
 
-                            <p class="text-muted mb-lg-4 mb-md-4">Founding Partner</p>
+                            <p class="text-muted mb-lg-4 mb-md-4">Veterinario de El Mister</p>
 
                             <p>Lorem Ipsum dolor sit amet, consectetur adipsicing kengan omeg kohm tokito Professional
                                 charity theme based</p>
@@ -385,7 +387,7 @@
 
                             <div class="custom-block">
                                 <div class="custom-block-body">
-                                    <h5 class="mb-3">Children Education</h5>
+                                    <h5 class="mb-3">Consultas Medicas</h5>
 
                                     <p>Lorem Ipsum dolor sit amet, consectetur adipsicing kengan omeg kohm tokito</p>
 
@@ -419,7 +421,7 @@
 
                             <div class="custom-block">
                                 <div class="custom-block-body">
-                                    <h5 class="mb-3">Poverty Development</h5>
+                                    <h5 class="mb-3">Analisis de Laboratorio</h5>
 
                                     <p>Sed leo nisl, posuere at molestie ac, suscipit auctor mauris. Etiam quis metus
                                         tempor</p>
@@ -449,12 +451,12 @@
 
                     <div class="col-lg-4 col-md-6 col-12">
                         <div class="custom-block-wrap">
-                            <img src="<?= media(); ?>/home/images/causes/african-woman-pouring-water-recipient-outdoors.jpg"
+                            <img src="<?=media();?>/home/images/causes/african-woman-pouring-water-recipient-outdoors.jpg"
                                 class="custom-block-image img-fluid" alt="">
 
                             <div class="custom-block">
                                 <div class="custom-block-body">
-                                    <h5 class="mb-3">Supply drinking water</h5>
+                                    <h5 class="mb-3">Vacunaciones </h5>
 
                                     <p>Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus
                                     </p>
@@ -491,7 +493,7 @@
                 <div class="row">
 
                     <div class="col-lg-6 col-12">
-                        <h2 class="text-white mb-4">Volunteer</h2>
+                        <h2 class="text-white mb-4">Citas</h2>
 
                         <form class="custom-form volunteer-form mb-5 mb-lg-0" action="#" method="post" role="form">
                             <h3 class="mb-4">Become a volunteer today</h3>
@@ -891,7 +893,7 @@
 
                     <div class="col-lg-4 col-12 ms-auto mb-5 mb-lg-0">
                         <div class="contact-info-wrap">
-                            <h2>Get in touch</h2>
+                            <h2>Ponte en contacto</h2>
 
                             <div class="contact-image-wrap d-flex flex-wrap">
                                 <img src="<?= media(); ?>/home/images/avatar/pretty-blonde-woman-wearing-white-t-shirt.jpg"
@@ -899,12 +901,12 @@
 
                                 <div class="d-flex flex-column justify-content-center ms-3">
                                     <p class="mb-0">Clara Barton</p>
-                                    <p class="mb-0"><strong>HR & Office Manager</strong></p>
+                                    <p class="mb-0"><strong>Recepcion & Tienda</strong></p>
                                 </div>
                             </div>
 
                             <div class="contact-info">
-                                <h5 class="mb-3">Contact Infomation</h5>
+                                <h5 class="mb-3">Información de Contacto</h5>
 
                                 <p class="d-flex mb-2">
                                     <i class="bi-geo-alt me-2"></i>

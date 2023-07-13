@@ -1,7 +1,10 @@
 <?php
 headerAdmin($data);
-getModal('modalClinica', $data);
+getModal('modalHistorial', $data);
 ?>
+<script>
+    let baseURL = "<?php echo base_url(); ?>";
+</script>
 <main class="app-content">
     <div class="app-title">
         <div>
@@ -23,37 +26,37 @@ getModal('modalClinica', $data);
                 <div class="tile-body">
                     <ul class="nav nav-pills flex-column mail-nav">
                         <li class="nav-item ">
-                            <div class="nav-link" href="#"><i class="fa fa-github fa-fw"></i> <strong>Nombre: </strong> <span id="txtMas_nombre" style="font-size:large;"><?= $data['perfil']['nombre'] ?></span></div>
+                            <div class="nav-link" href="#"><i class="fa fa-github fa-fw"></i> <strong>Nombre: </strong> <span id="txtMas_nombre" style="font-size:larger;"><?= $data['perfil']['nombre'] ?></span></div>
                         </li>
                         <li class="nav-item">
-                            <div class="nav-link" href="#"><i class="fa fa-braille fa-fw"></i> <strong>Especie: </strong><span id="txtMas_especie" style="font-size:large;"><?= $data['perfil']['especie'] ?></span></div>
+                            <div class="nav-link" href="#"><i class="fa fa-braille fa-fw"></i> <strong>Especie: </strong><span id="txtMas_especie" style="font-size:larger;"><?= $data['perfil']['especie'] ?></span></div>
                         </li>
                         <li class="nav-item">
-                            <div class="nav-link" href="#"><i class="fa fa-venus-mars fa-fw"></i> <strong>Sexo: </strong><span id="txtMas_sexo" style="font-size:large;"><?= $data['perfil']['sexo'] ?></span></div>
+                            <div class="nav-link" href="#"><i class="fa fa-venus-mars fa-fw"></i> <strong>Sexo: </strong><span id="txtMas_sexo" style="font-size:larger;"><?= $data['perfil']['sexo'] ?></span></div>
                         </li>
                         <li class="nav-item">
-                            <div class="nav-link" href="#"><i class="fa fa-circle fa-fw"></i> <strong>Raza: </strong><span id="txtMas_raza" style="font-size:large;"><?= $data['perfil']['raza'] ?></span></div>
+                            <div class="nav-link" href="#"><i class="fa fa-circle fa-fw"></i> <strong>Raza: </strong><span id="txtMas_raza" style="font-size:larger;"><?= $data['perfil']['raza'] ?></span></div>
                         </li>
                         <li class="nav-item">
-                            <div class="nav-link" href="#"><i class="fa fa-birthday-cake fa-fw"></i> <strong>F. Nacimiento: </strong><span id="txtMas_nacimiento" style="font-size:large;"><?= $data['perfil']['fecha_nacimiento'] ?></span></div>
+                            <div class="nav-link" href="#"><i class="fa fa-birthday-cake fa-fw"></i> <strong>F. Nacimiento: </strong><span id="txtMas_nacimiento" style="font-size:larger;"><?= $data['perfil']['fecha_nacimiento'] ?></span></div>
                         </li>
                     </ul>
                     <h5 class=" folder-head">Datos del Dueño</h5>
                     <ul class="nav nav-pills flex-column mail-nav">
                         <li class="nav-item ">
-                            <div class="nav-link" href="#"><i class="fa fa-user-circle fa-fw"></i> <strong>Dueño: </strong><span id="txtMas_dueño" style="font-size:large;"><?= $data['perfil']['d_nombre'] ?></span></div>
+                            <div class="nav-link" href="#"><i class="fa fa-user-circle fa-fw"></i> <strong>Dueño: </strong><span id="txtMas_dueño" style="font-size:larger;"><?= $data['perfil']['d_nombre'] ?></span></div>
                         </li>
                         <li class="nav-item">
-                            <div class="nav-link" href="#"><i class="fa fa-envelope-o fa-fw"></i> <strong>Email: </strong><span id="txtMas_email" style="font-size:large;"><?= $data['perfil']['apellidos'] ?></span></div>
+                            <div class="nav-link" href="#"><i class="fa fa-envelope-o fa-fw"></i> <strong>Email: </strong><span id="txtMas_email" style="font-size:larger;"><?= $data['perfil']['apellidos'] ?></span></div>
                         </li>
                         <li class="nav-item">
-                            <div class="nav-link" href="#"><i class="fa fa-address-card fa-fw"></i> <strong>DNI: </strong><span id="txtMas_dni" style="font-size:large;"><?= $data['perfil']['identificacion'] ?></span></div>
+                            <div class="nav-link" href="#"><i class="fa fa-address-card fa-fw"></i> <strong>DNI: </strong><span id="txtMas_dni" style="font-size:larger;"><?= $data['perfil']['identificacion'] ?></span></div>
                         </li>
                         <li class="nav-item">
-                            <div class="nav-link" href="#"><i class="fa fa-mobile fa-fw"></i> <strong>Tel: </strong><span id="txtMas_telefono" style="font-size:large;"><?= $data['perfil']['telefono'] ?></span></div>
+                            <div class="nav-link" href="#"><i class="fa fa-mobile fa-fw"></i> <strong>Tel: </strong><span id="txtMas_telefono" style="font-size:larger;"><?= $data['perfil']['telefono'] ?></span></div>
                         </li>
                         <li class="nav-item">
-                            <div class="nav-link" href="#"><i class="fa fa-building fa-fw"></i> <strong>Dirección: </strong><span id="txtMas_direccion" style="font-size:large;"><?= $data['perfil']['direccion'] ?></span></div>
+                            <div class="nav-link" href="#"><i class="fa fa-building fa-fw"></i> <strong>Dirección: </strong><span id="txtMas_direccion" style="font-size:larger;"><?= $data['perfil']['direccion'] ?></span></div>
                         </li>
                     </ul>
                 </div>
@@ -64,7 +67,7 @@ getModal('modalClinica', $data);
                 <div class="col-md-8">
                     <div class="tile ">
                         <div class="tile-body">
-                            <h3 class="text-center">Historal clinico</h3>
+                            <h3 class="text-center">Consultas</h3>
                         </div>
                         <!-- lista de consultas -->
                         <div class="row">
@@ -76,21 +79,26 @@ getModal('modalClinica', $data);
                                     // Datos de la mascota
                                     $motivo = $consulta["motivo"];
                                     $diagnostico = $consulta["diagnostico"];
-                                    $fecha = $consulta["fecha"];
+                                    $tratamiento = $consulta["tratamiento"];
+                                    $fechaCompleta = $consulta["fecha"];
+                                    $fecha = date("d/m/Y", strtotime($fechaCompleta));
                                     $medico = $consulta["p_nombre"] . ' ' . $consulta["p_apellidos"];
                                 ?>
-                                    <div class="card text-black bg-light my-3">
-                                        <div class="card-header">
-                                            <h5><?= $motivo ?></h5>
-                                        </div>
-                                        <div class="card-body">
-                                            <blockquote class="blockquote mb-0">
-                                                <p><?= $diagnostico ?></p>
-                                                <footer class="blockquote-footer text-right"><?= $medico ?><cite title="Source Title"> - <?= $fecha ?></cite></footer>
-                                            </blockquote>
+                                    <div class="card  mb-3 list-group-item-action" onclick="openModalConsulta()">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-4">
+                                                <img src="https://zootecniasl.com/blog/wp-content/uploads/2020/03/guia-visitas-clinica-veterinaria-2.jpg" class="rounded-sm img-thumbnail" alt="...">
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="card-body">
+                                                    <h5 class="card-title"><small class="text-muted">Motivo</small> <?= $motivo ?></h5>
+                                                    <p class="card-text"><small class="text-muted">Diagnostivo:</small> <?= $diagnostico ?>.</p>
+                                                    <p class="card-text"><small class="text-muted">Tratamiento:</small> <?= $tratamiento ?>.</p>
+                                                    <p class="card-text text-right"><small class="text-muted"><?= $fecha ?></small></p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    
                                 <?php
                                 }
                                 ?>
@@ -99,47 +107,49 @@ getModal('modalClinica', $data);
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="tile">
-                        <h4 class="text-center">Hacer Nueva?</h4>
-                        <div class="tile-body">
-                            <nav class="nav nav-pills nav-fill">
-                                <button class="nav-item nav-link active" href="#">Consulta</button>
-                                <button class="nav-item nav-link" href="#">Analisis</button>
-                                <button class="nav-item nav-link disabled" href="#">Vacuna</button>
-                            </nav>
+                    <?php if ($_SESSION['permisosMod']['w']) { ?>
+                        <div class="tile">
+                            <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                                <button type="button" class="btn">Help</button>
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                        AGREGAR NUEVA
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <button class="dropdown-item" href="#">Consulta</button>
+                                        <button class="dropdown-item" href="#">Analisis</button>
+                                        <button class="dropdown-item" href="#">Vacuna</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    <?php } ?>
                     <div class="tile">
                         <div class="tile-body">
                             <h3 class="text-center">Analisis</h3>
                             <div class="list-group">
-                                <!-- <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h5 class="mb-1">Tipo de </h5>
-                                        <small>3 days ago</small>
-                                    </div>
-                                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                                    <small>Donec id elit non mi porta.</small>
-                                </a> -->
                                 <?php
                                 $analisis = $data['analisis'];
                                 for ($i = 0; $i < count($analisis); $i++) {
                                     $ana = $analisis[$i];
                                     // Datos de la mascota
                                     $nombre = $ana["tipo"];
-                                    $fecha = $ana["fecha"];
+                                    $idanalisis = $ana["idanalisis"];
+                                    $fechaCompleta = $ana["fecha"];
+                                    $fecha = date("d/m/Y", strtotime($fechaCompleta));
                                     $diagnostico = $ana["diagnostico"];
                                     $medico = $ana["nombres"] . ' ' . $ana["apellidos"];
                                     $ruta = $ana["rutafile"];
+                                    $direc = '/Assets/documents/uploads/'. $ruta ;
                                 ?>
-                                    <a href="<?= media(); ?>/documents/uploads/<?= $ruta ?>" class="list-group-item list-group-item-action flex-column align-items-start">
+                                    <div onclick="fntAnalisis(<?= $idanalisis ?>);" class="list-group-item list-group-item-action flex-column align-items-start">
                                         <div class="d-flex w-100 justify-content-between">
                                             <h5 class="mb-1"><?= $nombre ?></h5>
                                             <small class="text-muted"><?= $fecha ?></small>
                                         </div>
                                         <p class="mb-1"><?= $diagnostico ?></p>
                                         <small class="text-muted"><?= $medico ?></small>
-                                    </a>
+                                    </div>
                                 <?php
                                 }
                                 ?>
@@ -155,13 +165,14 @@ getModal('modalClinica', $data);
                                 for ($i = 0; $i < count($vacuna); $i++) {
                                     $vacu = $vacuna[$i];
                                     // Datos de la mascota
+                                    $idvacuna = $vacu["idvacuna"];
                                     $nombre = $vacu["vacuna"];
                                     $dosis = $vacu["dosis"];
                                     $fecha = $vacu["fecha"];
                                     $codigo = $vacu["codigo"];
                                     $medico = $vacu["p_nombre"] . ' ' . $vacu["p_apellidos"];
                                 ?>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" onclick="fntVacuna(<?= $idvacuna ?>)">
                                         <?= $nombre ?>
                                         <small class="text-muted"><?= $codigo ?></small>
                                         <span class="badge badge-primary badge-pill"><?= $dosis ?> </span>

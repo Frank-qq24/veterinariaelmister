@@ -24,6 +24,7 @@
 		}
 
 		public function historial(int $idmascota) {
+			$data['page_id'] = 5;
 			$data['page_tag'] = "Historial";
 			$data['page_title'] = "Historial Clinico de Mascota";
 			$data['page_name'] = "Hitorial";
@@ -36,8 +37,12 @@
 			$data['consultas'] = $arrAnalisis;
 			$arrPerfil = $this->model->selectMascota($idmascota);
 			$data['perfil'] = $arrPerfil;
-			$data['page_functions_js'] = "functions_clinica.js";
+			$data['page_functions_js'] = "functions_historial.js";
 			$this->views->getView($this,"historial",$data);
+		}
+		public function printVacuna() {
+			$data['page_tag'] = "vacuna";
+			$this->views->getView($this,"vacuna",$data);
 		}
 
 		public function getClinicaPrueba(){
@@ -237,4 +242,41 @@
 			}
 			die();
 		}
+
+		public function getVacuna($vacuna) {
+            if($_SESSION['permisosMod']['r']){
+				$idvacuna = intval($vacuna);
+				if($idvacuna > 0)
+				{
+					$arrData = $this->model->selectVacuna($idvacuna);
+					if(empty($arrData))
+					{
+						$arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
+					}else{
+						$arrResponse = array('status' => true, 'data' => $arrData);
+					}
+					echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+				}
+			}
+			die();
+        }
+
+		public function getAnalisis($analisiid) {
+            if($_SESSION['permisosMod']['r']){
+				$idAnalisis = intval($analisiid);
+				if($idAnalisis > 0)
+				{
+					$arrData = $this->model->selectAnalisis($idAnalisis);
+					if(empty($arrData))
+					{
+						$arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
+					}else{
+						$arrResponse = array('status' => true, 'data' => $arrData);
+					}
+					echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+				}
+			}
+			die();
+        }
 	}
+?>

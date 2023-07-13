@@ -20,6 +20,12 @@
         $view_footer = "Views/Template/footer_admin.php";
         require_once ($view_footer);        
     }
+    function getFile(string $url, $data){
+        ob_start();
+        require_once("Views/{$url}.php");
+        $file = ob_get_clean();
+        return $file;
+    }
 	//Muestra información formateada
 	function dep($data)
     {

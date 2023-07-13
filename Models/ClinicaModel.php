@@ -35,7 +35,7 @@
         private $srtRutafile;
 
         // -------------------------------MODELOS PARA VACUNAS--------------------------------- //
-		public function selectVacunas(){
+		public function selectVacunas_All(){
 			$sql = "SELECT `idvacuna`, `vacuna`, `dosis`, `codigo`, `nota`, `historialid`, `personaid` FROM `vacunas`";
 			$request = $this->select_all($sql);
 			return $request;
@@ -48,6 +48,15 @@
                     WHERE v.historialid = $this->intIdvacuna
                     ORDER BY v.datecreated DESC";
 			$request = $this->select_all($sql);
+			return $request;
+		}
+		public function selectVacuna(int $vacunaid){
+            $this->intIdvacuna =$vacunaid;
+			$sql = "SELECT v.idvacuna, v.vacuna, v.dosis, v.codigo, v.nota, v.historialid, v.datecreated AS fecha, p.nombres AS p_nombre, p.apellidos AS p_apellidos, p.identificacion AS p_dni, p.telefono as p_telefono, p.email_user as p_email_user, m.nombre AS m_nombre,
+             m.especie, m.raza, m.sexo, m.fecha_nacimiento, c.nombres as c_nombres, c.apellidos as c_apellidos, c.telefono as c_telefono, c.direccion 
+             FROM vacunas v INNER JOIN historial_clinico h ON h.idhistorial = v.historialid INNER JOIN mascotas m ON m.idmascota = h.mascotaid 
+             INNER JOIN cliente c ON c.idcliente = m.clienteid INNER JOIN persona p ON p.idpersona = v.personaid WHERE v.idvacuna  = $this->intIdvacuna";
+			$request = $this->select($sql);
 			return $request;
 		}
 		public function insertVacuna(string $vacuna, int $dosis, string $codigo, string $nota, int $historialid, int $persinaid){
@@ -74,6 +83,14 @@
 			$sql = "SELECT `idconsulta`, `temperatura`, `peso`, `frecuencia`, `motivo`, `anamnesis`, `diagnostico`, `tratamiento`, `personaid`, `historialid` 
                     FROM `consulta` ";
 			$request = $this->select_all($sql);
+			return $request;
+		}
+        public function selectConsulta(int $consultaid){
+            $this->intIdconsulta =$consultaid;
+			$sql = "SELECT c.idconsulta, c.temperatura, c.peso, c.frecuencia, c.motivo, c.diagnostico, c.tratamiento, c.historialid, c.datecreated AS fecha, p.nombres AS p_nombre, p.apellidos AS p_apellidos, p.identificacion AS p_dni, p.telefono AS p_telefono, p.email_user AS p_email_user,
+                m.nombre AS m_nombre, m.especie, m.raza, m.sexo, m.fecha_nacimiento, cl.nombres AS c_nombres, cl.apellidos AS c_apellidos, cl.telefono AS c_telefono, cl.direccion FROM consulta c INNER JOIN historial_clinico h ON h.idhistorial = c.historialid INNER JOIN mascotas m ON m.idmascota = h.mascotaid 
+                INNER JOIN cliente cl ON cl.idcliente = m.clienteid INNER JOIN persona p ON p.idpersona = c.personaid WHERE c.idconsulta = = $this->intIdconsulta";
+			$request = $this->select($sql);
 			return $request;
 		}
 		public function selectConsulta_hist(int $consultaid){
@@ -111,6 +128,7 @@
 			$return = $request_insert;
 			return $return;
 		}
+        
         // -------------------------------MODELOS PARA ANALISIS--------------------------------- //
         public function selectAnalisiss(){
 			$sql = "SELECT `idanalisis`, `tipo`, `rutafile`, `diagnostico`, `tratamiento`, `historialid`, `personaid` FROM `analisis`";
@@ -147,6 +165,17 @@
 			return $return;
 		}
 
+        public function selectAnalisis(int $analisisid){
+            $this->intIdAnalisis =$analisisid;
+			$sql = "SELECT a.idanalisis, a.tipo, a.rutafile, a.diagnostico, a.historialid, a.tratamiento, a.datecreated AS fecha, p.nombres AS p_nombre, p.apellidos AS p_apellidos, 
+            p.identificacion AS p_dni, p.telefono AS p_telefono, p.email_user AS p_email_user, m.nombre AS m_nombre, m.especie, m.raza, m.sexo, m.fecha_nacimiento, c.nombres AS c_nombres, 
+            c.apellidos AS c_apellidos, c.telefono AS c_telefono, c.direccion FROM analisis a INNER JOIN historial_clinico h ON h.idhistorial = a.historialid 
+            INNER JOIN mascotas m ON m.idmascota = h.mascotaid INNER JOIN cliente c ON c.idcliente = m.clienteid 
+            INNER JOIN persona p ON p.idpersona = a.personaid WHERE a.idanalisis = $this->intIdAnalisis";
+			$request = $this->select($sql);
+			return $request;
+		}
+
         // ============================================= MODELOS GENERALES==================================================== //
         private $intIdmascota;
         public function selectMascota(int $idMascota){
@@ -172,4 +201,3 @@
         }
 
 	}
-?>
