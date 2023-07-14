@@ -13,7 +13,7 @@ getModal('modalHistorial', $data);
         <ul class="app-breadcrumb breadcrumb">
             <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
             <li class="breadcrumb-item"><a href="<?= base_url(); ?>/clinica">Clinica</a></li>
-            <li class="breadcrumb-item"><a href="<?= base_url(); ?>/clinica/historial">Historial</a></li>
+            <li class="breadcrumb-item"><a href="#">Historial</a></li>
         </ul>
     </div>
     <div class="row">
@@ -77,6 +77,7 @@ getModal('modalHistorial', $data);
                                 for ($i = 0; $i < count($consultas); $i++) {
                                     $consulta = $consultas[$i];
                                     // Datos de la mascota
+                                    $idconsulta = $consulta["idconsulta"];
                                     $motivo = $consulta["motivo"];
                                     $diagnostico = $consulta["diagnostico"];
                                     $tratamiento = $consulta["tratamiento"];
@@ -84,16 +85,16 @@ getModal('modalHistorial', $data);
                                     $fecha = date("d/m/Y", strtotime($fechaCompleta));
                                     $medico = $consulta["p_nombre"] . ' ' . $consulta["p_apellidos"];
                                 ?>
-                                    <div class="card  mb-3 list-group-item-action" onclick="openModalConsulta()">
-                                        <div class="row no-gutters">
-                                            <div class="col-md-4">
-                                                <img src="https://zootecniasl.com/blog/wp-content/uploads/2020/03/guia-visitas-clinica-veterinaria-2.jpg" class="rounded-sm img-thumbnail" alt="...">
+                                    <div class="card mb-3 list-group-item-action" onclick="fntConsulta(<?= $idconsulta ?>);">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                            <img src="<?= media(); ?>/images/recursos/cosulta2.svg" width="100px">
                                             </div>
                                             <div class="col-md-8">
                                                 <div class="card-body">
-                                                    <h5 class="card-title"><small class="text-muted">Motivo</small> <?= $motivo ?></h5>
-                                                    <p class="card-text"><small class="text-muted">Diagnostivo:</small> <?= $diagnostico ?>.</p>
-                                                    <p class="card-text"><small class="text-muted">Tratamiento:</small> <?= $tratamiento ?>.</p>
+                                                    <label class="card-title"><small class="text-muted">Motivo:</small> <?= $motivo ?></label><br>
+                                                    <label class="card-text"><small class="text-muted">Diagnostivo:</small> <?= $diagnostico ?>.</label><br>
+                                                    <label class="card-text"><small class="text-muted">Tratamiento:</small> <?= $tratamiento ?>.</label>
                                                     <p class="card-text text-right"><small class="text-muted"><?= $fecha ?></small></p>
                                                 </div>
                                             </div>
@@ -107,7 +108,7 @@ getModal('modalHistorial', $data);
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <?php if ($_SESSION['permisosMod']['w']) { ?>
+                    <!-- <?php if ($_SESSION['permisosMod']['w']) { ?>
                         <div class="tile">
                             <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
                                 <button type="button" class="btn">Help</button>
@@ -123,7 +124,7 @@ getModal('modalHistorial', $data);
                                 </div>
                             </div>
                         </div>
-                    <?php } ?>
+                    <?php } ?> -->
                     <div class="tile">
                         <div class="tile-body">
                             <h3 class="text-center">Analisis</h3>
@@ -168,20 +169,21 @@ getModal('modalHistorial', $data);
                                     $idvacuna = $vacu["idvacuna"];
                                     $nombre = $vacu["vacuna"];
                                     $dosis = $vacu["dosis"];
-                                    $fecha = $vacu["fecha"];
+                                    $fechaCompleta = $vacu["fecha"];
+                                    $fecha = date("d/m/Y", strtotime($fechaCompleta));
                                     $codigo = $vacu["codigo"];
                                     $medico = $vacu["p_nombre"] . ' ' . $vacu["p_apellidos"];
                                 ?>
                                     <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" onclick="fntVacuna(<?= $idvacuna ?>)">
                                         <?= $nombre ?>
-                                        <small class="text-muted"><?= $codigo ?></small>
-                                        <span class="badge badge-primary badge-pill"><?= $dosis ?> </span>
+                                        <small class="text-muted">(<?= $fecha ?>)</small>
+                                        <span class="badge badge-primary badge-pill"><?= $dosis ?>ml</span>
                                     </li>
                                 <?php
                                 }
                                 ?>
                             </ul>
-                            <nav aria-label="Paginación">
+                            <!-- <nav aria-label="Paginación">
                                 <ul class="pagination justify-content-center">
                                     <li class="page-item disabled">
                                         <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
@@ -199,11 +201,11 @@ getModal('modalHistorial', $data);
                                         <a class="page-link" href="#">Siguiente</a>
                                     </li>
                                 </ul>
-                            </nav>
+                            </nav> -->
                         </div>
 
                     </div>
-                    <div class="tile">
+                    <!-- <div class="tile">
                         <h3>Notas</h3>
                         <div class="tile-body">
                             <div class="card">
@@ -248,7 +250,7 @@ getModal('modalHistorial', $data);
                             </div>
                         </div>
 
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

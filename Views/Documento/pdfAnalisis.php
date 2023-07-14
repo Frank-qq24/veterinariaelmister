@@ -1,128 +1,141 @@
-
+<?php
+$analisis = $data['analisis'];
+$historia = $data['historia'];
+$mascota = $data['mascota'];
+$cliente = $data['cliente'];
+$veterinario = $data['persona'];
+?>
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ficha de Historial Médico Veterinario</title>
-  <style>
-		table{
-			width: 100%;
-		}
-		table td, table th{
-			font-size: 12px;
-		}
-		h4{
-			margin-bottom: 0px;
-		}
-		.text-center{
-			text-align: center;
-		}
-		.text-right{
-			text-align: right;
-		}
-		.wd33{
-			width: 33.33%;
-		}
-		.tbl-cliente{
-			border: 1px solid #CCC;
-			border-radius: 10px;
-			padding: 5px;
-		}
-		.wd10{
-			width: 10%;
-		}
-		.wd15{
-			width: 15%;
-		}
-		.wd40{
-			width: 40%;
-		}
-		.wd55{
-			width: 55%;
-		}
-		.tbl-detalle{
-			border-collapse: collapse;
-		}
-		.tbl-detalle thead th{
-			padding: 5px;
-			background-color: #009688;
-			color: #FFF;
-		}
-		.tbl-detalle tbody td{
-			border-bottom: 1px solid #CCC;
-			padding: 5px;
-		}
-		.tbl-detalle tfoot td{
-			padding: 5px;
-		}
-        .marca-de-agua {
-            background-image: url("<?=media();?>/images/icono.png");
-            background-repeat: no-repeat;
-            background-position: center;
-            width: 100%;
-            height: auto;
-            margin: auto;
-        }
-        .marca-de-agua img {
-            padding: 0;
-            width: 100%;
-            height: auto;
-            opacity: 0.7;
-        }
-	</style>
-</head>
-<body>
-<div class="marca-de-agua">
-<img alt="" src="URL-IMAGEN" /></div>
 
-<table class="tbl-hader">
-		<tbody>
-			<tr>
-				<td class="wd33">
-					<img src="<?=media();?>/images/icono.png">
-				</td>
-				<td class="text-center wd33">
-					<h4><strong></strong></h4>
-					<p><br>
-					Teléfono:<br>
-					Email:</p>
-				</td>
-				<td class="text-right wd33">
-					<p>No. Orden <strong></strong><br>
-						Fecha:  <br>
-						
-						Método Pago: <br>
-						Transacción: 
-						Método Pago: Pago contra entrega <br>
-						Tipo Pago: 
-					</p>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-	<br>
-	<table class="tbl-cliente">
-		<tbody>
-			<tr>
-				<td class="wd10">NIT:</td>
-				<td class="wd40"></td>
-				<td class="wd10">Teléfono:</td>
-				<td class="wd40"></td>
-			</tr>
-			<tr>
-				<td>Nombre:</td>
-				<td></td>
-				<td>Dirección:</td>
-				<td></td>
-			</tr>
-		</tbody>
-	</table>
-	<br>
-	
-	<div class="text-center">
-		<p>Si tienes preguntas sobre tu pedido, <br> pongase en contacto con nombre, teléfono y Email</p>
-		<h4>¡Gracias por tu compra!</h4>
-	</div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="<?= media(); ?>/css/reporte.css">
+    <title>Ficha de Analisis</title>
+</head>
+
+<body>
+    <table class="tbl-hader">
+        <tbody>
+            <tr>
+                <td class="wd33">
+                    <img src="<?= media(); ?>/images/recursos/nombre2.jpg" class="logo">
+                </td>
+                <td class="text-center wd33">
+                    <h1><strong>Ficha de Analisis Medico</strong></h1>
+                    <p>Fecha: <?= $analisis['fecha']; ?></p>
+                </td>
+                <td class="text-right wd33">
+                    <img src="<?= media(); ?>/images/recursos/icono2.png" class="logo">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <hr class="hr_color">
+    <div class="content">
+        <div class="table-wrapper">
+            <table>
+                <tr>
+                    <td colspan="4" class="celda-destacada">Veterinario Encargado</td>
+                </tr>
+                <tr>
+                    <td><strong>Codigo:</strong></td>
+                    <td><?= $veterinario['nit']; ?></td>
+                    <td><strong>Nombres y Apellidos:</strong> </td>
+                    <td><?= $veterinario['nombres'] . ' ' . $veterinario['apellidos']; ?></td>
+                </tr>
+                <!-- <tr>
+                    <td><strong>Nombres:</strong> </td>
+                    <td><?= $veterinario['nombres']; ?></td>
+                    <td><strong>Correo:</strong> </td>
+                    <td><?= $veterinario['email_user']; ?></td>
+                </tr>
+                <tr>
+                    <td><strong>Apellidos:</strong> </td>
+                    <td><?= $veterinario['apellidos']; ?></td>
+                    <td><strong>Telefono:</strong></td>
+                    <td><?= $veterinario['telefono']; ?></td>
+                </tr> -->
+            </table>
+
+            <table>
+                <tr>
+                    <td colspan="6" class="celda-destacada"><strong>Datos del Dueño</strong> </td>
+                </tr>
+                <tr>
+                    <td><strong>Indentificación:</strong> </td>
+                    <td><?= $cliente['identificacion']; ?></td>
+                    <td><strong>Nombres:</strong></td>
+                    <td><?= $cliente['nombres']; ?></td>
+                    <td><strong>Apellidos:</strong> </td>
+                    <td><?= $cliente['apellidos']; ?></td>
+                </tr>
+                <tr>
+                    <td><strong>Correo: </strong></td>
+                    <td colspan="2"><?= $cliente['email_cliente']; ?></td>
+                    <td><strong>Telefono:</strong> </td>
+                    <td colspan="2"><?= $cliente['telefono']; ?></td>
+                </tr>
+                <tr>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td colspan="8" class="celda-destacada"><strong>Datos de la Mascota</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>Nombre:</strong> </td>
+                    <td><?= $mascota['nombre']; ?></td>
+                    <td><strong>Especie:</strong> </td>
+                    <td><?= $mascota['especie']; ?></td>
+                    <td><strong>Raza:</strong> </td>
+                    <td><?= $mascota['raza']; ?></td>
+                    <td><strong>Sexo:</strong> </td>
+                    <td><?= $mascota['sexo']; ?></td>
+                </tr>
+                <tr>
+                    <td><strong>Edad:</strong> </td>
+                    <td><?= edadMascota($mascota['fecha_nacimiento']); ?></td>
+                    <td><strong>Descripción:</strong> </td>
+                    <td colspan="5"><?= $mascota['descripcion']; ?></td>
+                </tr>
+                <tr>
+                </tr>
+            </table>
+
+            <table>
+                <tr>
+                    <td colspan="4" class="celda-destacada"><strong>Analisis</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>Tipo de Analisis:</strong> </td>
+                    <td><?= $analisis['tipo']; ?></td>
+                    <td><strong>IdDocumento:</strong> </td>
+                    <td>ANA-000<?= $analisis['idanalisis']; ?></td>
+                </tr>
+                <tr>
+                    <td><strong>Diagnostico:</strong> </td>
+                    <td><?= $analisis['diagnostico']; ?></td>
+                    <td><strong>Tratamiento:</strong></td>
+                    <td><?= $analisis['tratamiento']; ?></td>
+                </tr>
+            </table>
+
+
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        
+    </div>
+    <div class="footer">
+        <hr class="hr_color">
+        <span> <img src="<?= media(); ?>/images/recursos/direccion.svg" width="18"> Mz. D1 Lt.6, Las Orquídeas, San Bartolo </span>
+        <span><img src="<?= media(); ?>/images/recursos/phone.svg" width="18"> 2726085 - 990116813 - 980203488</span>
+    </div>
 </body>
+
 </html>

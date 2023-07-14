@@ -62,16 +62,22 @@ function fntVacuna(idvacuna){
                 document.querySelector("#txtDosis").value = objData.data.dosis;
                 document.querySelector("#txtCodigo").value = objData.data.codigo;
                 document.querySelector("#txtNotas").value = objData.data.nota;
-                // DAtos de la ficha
-                document.getElementById("hl_dueño_va").innerText = objData.data.c_nombres + " " + objData.data.c_apellidos;
-                // document.getElementById("hl_dni_va").innerText = objData.data.identificacion;
-                // document.getElementById("hl_correo_va").innerText = objData.data.email_cliente;
-                document.getElementById("hl_telefono_va").innerText = objData.data.c_telefono;
 
-                document.getElementById("hl_mascota_va").innerText = objData.data.m_nombre;
-                document.getElementById("hl_especie_va").innerText = objData.data.especie;
-                document.getElementById("hl_sexo_va").innerText = objData.data.sexo;
-                document.getElementById("hl_raza_va").innerText = objData.data.raza;
+                document.getElementById("persona_nom_vacuna").innerText = objData.data.p_nombre + " " + objData.data.p_apellidos;
+                document.getElementById("fecha_vacuna").innerText = objData.data.fecha;
+                let miEnlace = document.getElementById("ImprimirVacuna");
+                miEnlace.target = "_blank";
+                miEnlace.href = baseURL+"/documento/printVacuna/"+objData.data.idvacuna;
+                // DAtos de la ficha
+                // document.getElementById("hl_dueño_va").innerText = objData.data.c_nombres + " " + objData.data.c_apellidos;
+                // // document.getElementById("hl_dni_va").innerText = objData.data.identificacion;
+                // // document.getElementById("hl_correo_va").innerText = objData.data.email_cliente;
+                // document.getElementById("hl_telefono_va").innerText = objData.data.c_telefono;
+
+                // document.getElementById("hl_mascota_va").innerText = objData.data.m_nombre;
+                // document.getElementById("hl_especie_va").innerText = objData.data.especie;
+                // document.getElementById("hl_sexo_va").innerText = objData.data.sexo;
+                // document.getElementById("hl_raza_va").innerText = objData.data.raza;
 
 
             }
@@ -98,7 +104,7 @@ function fntAnalisis(idana){
                 // Obtén una referencia al enlace <a>
                 let miEnlace = document.getElementById("ImprimirAnalisis");
                 miEnlace.target = "_blank";
-                miEnlace.href = baseURL+"/documento/generarAnalisis/"+objData.data.idanalisis;
+                miEnlace.href = baseURL+"/documento/printAnalisis/"+objData.data.idanalisis;
                 // DAtos de la ficha
                 document.getElementById("persona_nom_analisis").innerText = objData.data.p_nombre + " " + objData.data.p_apellidos;
                 // document.getElementById("hl_dni_va").innerText = objData.data.identificacion;
@@ -107,6 +113,40 @@ function fntAnalisis(idana){
             }
         }
         $('#modalHistorialAnalisis').modal('show');
+    }
+}
+function fntConsulta(idcon){
+    let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let ajaxUrl = base_url+'/Clinica/getConsulta/'+idcon;
+    request.open("GET",ajaxUrl,true);
+    request.send();
+    request.onreadystatechange = function(){
+        if(request.readyState == 4 && request.status == 200){
+            let objData = JSON.parse(request.responseText);
+            if(objData.status)
+            {
+                document.querySelector("#idhistorial_consulta").value = objData.data.historialid;
+                document.querySelector("#idconsulta").value = objData.data.idconsulta;
+                document.querySelector("#txtPeso").value = objData.data.peso;
+                document.querySelector("#txtTemperatura").value = objData.data.temperatura;
+                document.querySelector("#txtRespiracion").value = objData.data.frecuencia;
+                document.querySelector("#txtMotivo").value = objData.data.motivo;
+                document.querySelector("#txtAnamnesis").value = objData.data.anamnesis;
+                document.querySelector("#txtDiagnostico").value = objData.data.diagnostico;
+                document.querySelector("#txtTratamiento").value = objData.data.tratamiento;
+                rutaPDFanalisis = objData.data.rutafile;
+                // Obtén una referencia al enlace <a>
+                let miEnlace = document.getElementById("ImprimirConsulta");
+                miEnlace.target = "_blank";
+                miEnlace.href = baseURL+"/documento/printConsulta/"+objData.data.idconsulta;
+                // DAtos de la ficha
+                document.getElementById("persona_nom_consulta").innerText = objData.data.p_nombre + " " + objData.data.p_apellidos;
+                // document.getElementById("hl_dni_va").innerText = objData.data.identificacion;
+                // document.getElementById("hl_correo_va").innerText = objData.data.email_cliente;
+                document.getElementById("fecha_consulta").innerText = objData.data.fecha;
+            }
+        }
+        $('#modalHistorialConsulta').modal('show');
     }
 }
 // document.getElementById('myButton').onclick = btnAnalisis;

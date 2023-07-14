@@ -34,6 +34,45 @@
         private $strTipo;
         private $srtRutafile;
 
+        // PARA CLIENTES
+        private $intIdCliente;
+        private $strIdentificacion;
+        private $strNombre;
+        private $strApellido;
+        private $intTelefono;
+        private $strEmail;
+        private $strDireccion;
+        // private $strNota;
+        private $intPersonaid;
+        private $intStatus;
+        
+        // PARA MASCOTAS
+        // private $intIdmascota;
+		// private $strNombre;
+		private $strEspecie;
+		private $strRaza;
+		private $strSexo;
+		private $dateFecha_Nacimiento;
+		private $strDescripcion;
+		private $intClienteID;
+		private $fileFoto;
+		// private $intStatus;
+		// private $intPersonaID;
+
+        // PARA USUARIOS
+        private $intIdUsuario;
+		// private $strIdentificacion;
+		// private $strNombre;
+		// private $strApellido;
+		// private $intTelefono;
+		// private $strEmail;
+		private $strPassword;
+		private $strToken;
+		private $intTipoId;
+		// private $intStatus;
+		private $strNit;
+		private $strNomFiscal;
+		private $strDirFiscal;
         // -------------------------------MODELOS PARA VACUNAS--------------------------------- //
 
 		public function selectVacuna(int $vacunaid){
@@ -86,5 +125,168 @@
 			$request = $this->select_all($sql);
 			return $request;
         }
-
+        public function selectCliente(int $idcliente){
+            $this->intIdCliente = $idcliente;
+            $sql = "SELECT idcliente,identificacion,nombres,apellidos,telefono,email_cliente,direccion,nota,status, DATE_FORMAT(datacreated, '%d-%m-%Y') as fechaRegistro 
+                    FROM cliente
+                    WHERE idcliente = $this->intIdCliente";
+            $request = $this->select($sql);
+            return $request;
+        }
+        
+        public function selectUsuario(int $idpersona){
+			$this->intIdUsuario = $idpersona;
+			$sql = "SELECT p.idpersona,p.identificacion,p.nombres,p.apellidos,p.telefono,p.email_user,p.nit,p.nombrefiscal,p.direccionfiscal,r.idrol,r.nombrerol,p.status, DATE_FORMAT(p.datecreated, '%d-%m-%Y') as fechaRegistro 
+					FROM persona p
+					INNER JOIN rol r
+					ON p.rolid = r.idrol
+					WHERE p.idpersona = $this->intIdUsuario";
+			$request = $this->select($sql);
+			return $request;
+		}
+        
+        public function selectAnalisis_All(int $idAnalisis){
+			$request = array();
+            // =========================================== Analisis
+			$sql = "SELECT `idanalisis`, `tipo`, `rutafile`, `diagnostico`, `tratamiento`, `historialid`, `personaid`, `datecreated` as fecha
+                    FROM `analisis`
+					WHERE idanalisis =  $idAnalisis ";
+			$requestAnalisis = $this->select($sql);
+            
+			if(!empty($requestAnalisis)){
+                // =========================================== Historial
+				$idhistorial = $requestAnalisis['historialid'];
+				$sql_Historia = "SELECT `idhistorial`, `mascotaid`, `personaid`, `datecreated`as fecha, `updated` 
+                                FROM `historial_clinico`
+                                WHERE idhistorial = $idhistorial ";
+				$requestHistoria = $this->select($sql_Historia);
+                // =========================================== Mascota
+                $idMascota = $requestHistoria['mascotaid'];
+				$sql_mascota = "SELECT `idmascota`, `nombre`, `especie`, `raza`, `sexo`, `fecha_nacimiento`, `descripcion`, `clienteid`, `foto`, `datecreated`, `status` 
+                                FROM `mascotas`
+								WHERE idmascota = $idMascota";
+				$requestMascota = $this->select($sql_mascota);
+                // =========================================== Cliente dueño de mascota
+                $idCliente = $requestMascota['clienteid'];
+				$sql_Cliente = "SELECT `idcliente`, `identificacion`, `nombres`, `apellidos`, `telefono`, `email_cliente`, `direccion`, `nota`, `status` 
+                                FROM `cliente`
+								WHERE idcliente = $idCliente";
+				$requestCliente = $this->select($sql_Cliente);
+                // =========================================== Veterinario que atendio
+                $idPersona = $requestAnalisis['personaid'];
+				$sql_persona = "SELECT `idpersona`, `identificacion`, `nombres`, `apellidos`, `telefono`, `email_user`, `nit`, `nombrefiscal`, `direccionfiscal`
+                                FROM `persona`
+								WHERE idpersona = $idPersona";
+				$requestPersona = $this->select($sql_persona);
+                // =========================================== Datos de Envio
+				$request = array('analisis' => $requestAnalisis,
+								'historia' => $requestHistoria,
+								'mascota' => $requestMascota,
+								'cliente' => $requestCliente,
+								'persona' => $requestPersona
+								);
+			}
+            if (empty($request)){
+                $request = array('msg' => "Error en busqueda");
+                return $request;
+            }else{
+                return $request;
+            }
+		}
+        public function selectVacuna_All(int $idVacuna){
+			$request = array();
+            // =========================================== Analisis
+			$sql = "SELECT `idvacuna`, `vacuna`, `dosis`, `codigo`, `nota`, `historialid`, `personaid`, `datecreated` as fecha
+                    FROM `vacunas`  
+                    WHERE idvacuna =  $idVacuna ";
+			$requestVacuna = $this->select($sql);
+            
+			if(!empty($requestVacuna)){
+                // =========================================== Historial
+				$idhistorial = $requestVacuna['historialid'];
+				$sql_Historia = "SELECT `idhistorial`, `mascotaid`, `personaid`, `datecreated`as fecha, `updated` 
+                                FROM `historial_clinico`
+                                WHERE idhistorial = $idhistorial ";
+				$requestHistoria = $this->select($sql_Historia);
+                // =========================================== Mascota
+                $idMascota = $requestHistoria['mascotaid'];
+				$sql_mascota = "SELECT `idmascota`, `nombre`, `especie`, `raza`, `sexo`, `fecha_nacimiento`, `descripcion`, `clienteid`, `foto`, `datecreated`, `status` 
+                                FROM `mascotas`
+								WHERE idmascota = $idMascota";
+				$requestMascota = $this->select($sql_mascota);
+                // =========================================== Cliente dueño de mascota
+                $idCliente = $requestMascota['clienteid'];
+				$sql_Cliente = "SELECT `idcliente`, `identificacion`, `nombres`, `apellidos`, `telefono`, `email_cliente`, `direccion`, `nota`, `status` 
+                                FROM `cliente`
+								WHERE idcliente = $idCliente";
+				$requestCliente = $this->select($sql_Cliente);
+                // =========================================== Veterinario que atendio
+                $idPersona = $requestVacuna['personaid'];
+				$sql_persona = "SELECT `idpersona`, `identificacion`, `nombres`, `apellidos`, `telefono`, `email_user`, `nit`, `nombrefiscal`, `direccionfiscal`
+                                FROM `persona`
+								WHERE idpersona = $idPersona";
+				$requestPersona = $this->select($sql_persona);
+                // =========================================== Datos de Envio
+				$request = array('vacuna' => $requestVacuna,
+								'historia' => $requestHistoria,
+								'mascota' => $requestMascota,
+								'cliente' => $requestCliente,
+								'persona' => $requestPersona
+								);
+			}
+            if (empty($request)){
+                $request = array('msg' => "Error en busqueda");
+                return $request;
+            }else{
+                return $request;
+            }
+		}
+        public function selectConsulta_All(int $idConsulta){
+			$request = array();
+            // =========================================== Analisis
+			$sql = "SELECT `idconsulta`, `temperatura`, `peso`, `frecuencia`, `motivo`, `anamnesis`, `diagnostico`, `tratamiento`, `personaid`, `historialid`, `datecreated` as fecha
+                    FROM `consulta` 
+                    WHERE idconsulta =  $idConsulta ";
+			$requestConsulta = $this->select($sql);
+            
+			if(!empty($requestConsulta)){
+                // =========================================== Historial
+				$idhistorial = $requestConsulta['historialid'];
+				$sql_Historia = "SELECT `idhistorial`, `mascotaid`, `personaid`, `datecreated`as fecha, `updated` 
+                                FROM `historial_clinico`
+                                WHERE idhistorial = $idhistorial ";
+				$requestHistoria = $this->select($sql_Historia);
+                // =========================================== Mascota
+                $idMascota = $requestHistoria['mascotaid'];
+				$sql_mascota = "SELECT `idmascota`, `nombre`, `especie`, `raza`, `sexo`, `fecha_nacimiento`, `descripcion`, `clienteid`, `foto`, `datecreated`, `status` 
+                                FROM `mascotas`
+								WHERE idmascota = $idMascota";
+				$requestMascota = $this->select($sql_mascota);
+                // =========================================== Cliente dueño de mascota
+                $idCliente = $requestMascota['clienteid'];
+				$sql_Cliente = "SELECT `idcliente`, `identificacion`, `nombres`, `apellidos`, `telefono`, `email_cliente`, `direccion`, `nota`, `status` 
+                                FROM `cliente`
+								WHERE idcliente = $idCliente";
+				$requestCliente = $this->select($sql_Cliente);
+                // =========================================== Veterinario que atendio
+                $idPersona = $requestConsulta['personaid'];
+				$sql_persona = "SELECT `idpersona`, `identificacion`, `nombres`, `apellidos`, `telefono`, `email_user`, `nit`, `nombrefiscal`, `direccionfiscal`
+                                FROM `persona`
+								WHERE idpersona = $idPersona";
+				$requestPersona = $this->select($sql_persona);
+                // =========================================== Datos de Envio
+				$request = array('consulta' => $requestConsulta,
+								'historia' => $requestHistoria,
+								'mascota' => $requestMascota,
+								'cliente' => $requestCliente,
+								'persona' => $requestPersona
+								);
+			}
+            if (empty($request)){
+                $request = array('msg' => "Error en busqueda");
+                return $request;
+            }else{
+                return $request;
+            }
+		}
 	}

@@ -87,9 +87,9 @@
 		}
         public function selectConsulta(int $consultaid){
             $this->intIdconsulta =$consultaid;
-			$sql = "SELECT c.idconsulta, c.temperatura, c.peso, c.frecuencia, c.motivo, c.diagnostico, c.tratamiento, c.historialid, c.datecreated AS fecha, p.nombres AS p_nombre, p.apellidos AS p_apellidos, p.identificacion AS p_dni, p.telefono AS p_telefono, p.email_user AS p_email_user,
+			$sql = "SELECT c.idconsulta, c.temperatura, c.peso, c.frecuencia, c.motivo,c.anamnesis,  c.diagnostico, c.tratamiento, c.historialid, c.datecreated AS fecha, p.nombres AS p_nombre, p.apellidos AS p_apellidos, p.identificacion AS p_dni, p.telefono AS p_telefono, p.email_user AS p_email_user,
                 m.nombre AS m_nombre, m.especie, m.raza, m.sexo, m.fecha_nacimiento, cl.nombres AS c_nombres, cl.apellidos AS c_apellidos, cl.telefono AS c_telefono, cl.direccion FROM consulta c INNER JOIN historial_clinico h ON h.idhistorial = c.historialid INNER JOIN mascotas m ON m.idmascota = h.mascotaid 
-                INNER JOIN cliente cl ON cl.idcliente = m.clienteid INNER JOIN persona p ON p.idpersona = c.personaid WHERE c.idconsulta = = $this->intIdconsulta";
+                INNER JOIN cliente cl ON cl.idcliente = m.clienteid INNER JOIN persona p ON p.idpersona = c.personaid WHERE c.idconsulta = $this->intIdconsulta";
 			$request = $this->select($sql);
 			return $request;
 		}

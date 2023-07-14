@@ -158,4 +158,25 @@
         $cantidad = number_format($cantidad,2,SPD,SPM);
         return $cantidad;
     }
+    // funciones Mias
+    function edadMascota($Nacimiento){
+        $fechaEntrada = $Nacimiento;
+        $fechaActual = new DateTime(); // Obtener la fecha actual
+        // Crear objetos DateTime para las fechas de entrada y actual
+        $fechaEntradaObj = DateTime::createFromFormat('Y-m-d', $fechaEntrada);
+        // Calcular la diferencia entre las fechas
+        $intervalo = $fechaEntradaObj->diff($fechaActual);
+        // Obtener los años y meses de diferencia
+        $anios = $intervalo->y;
+        $meses = $intervalo->m;
+        $resultado = '';
+        if ($anios > 0) {
+            $resultado .= ($anios > 1) ? $anios . ' años' : $anios . ' año';
+        }
+        if ($meses > 0) {
+            $resultado .= ($resultado != '') ? ' y ' : '';
+            $resultado .= ($meses > 1) ? $meses . ' meses' : $meses . ' mes';
+        }
+        return $resultado;
+    }
  ?>

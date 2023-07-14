@@ -40,10 +40,6 @@
 			$data['page_functions_js'] = "functions_historial.js";
 			$this->views->getView($this,"historial",$data);
 		}
-		public function printVacuna() {
-			$data['page_tag'] = "vacuna";
-			$this->views->getView($this,"vacuna",$data);
-		}
 
 		public function getClinicaPrueba(){
 			if($_SESSION['permisosMod']['r']){
@@ -260,7 +256,23 @@
 			}
 			die();
         }
-
+		public function getConsulta($consulta) {
+            if($_SESSION['permisosMod']['r']){
+				$idconsulta = intval($consulta);
+				if($idconsulta > 0)
+				{
+					$arrData = $this->model->selectConsulta($idconsulta);
+					if(empty($arrData))
+					{
+						$arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
+					}else{
+						$arrResponse = array('status' => true, 'data' => $arrData);
+					}
+					echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+				}
+			}
+			die();
+        }
 		public function getAnalisis($analisiid) {
             if($_SESSION['permisosMod']['r']){
 				$idAnalisis = intval($analisiid);

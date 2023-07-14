@@ -14,35 +14,13 @@
             <section class="invoice">
               <div class="row">
                 <div class="col-6">
-                  <h2 class="page-header"><i class="fa fa-hospital"></i> <small>id:</small>CON-24-1</h2>
+                  <h5 class="page-header"><small>Atendido por: </small><label id="persona_nom_consulta"></label></h5>
                 </div>
                 <div class="col-6">
-                  <h5 class="text-right">Fecha: <?php echo date('d/m/Y'); ?></h5>
+                  <h5 class="text-right"><small>Fecha: </small> <label class="form-check-label" id="fecha_consulta"></h5>
                 </div>
               </div>
-              
-              <hr>
-              <div class="row invoice-info mb-4">
-                <div class="col-4">
-                    <h5 class="text-center"><b>Cliente</b></h5>
-                    <b>Nombre: </b><label class="form-check-label" id="hl_dueño_co"></label><br>
-                    <b>Identificación: </b><label class="form-check-label" id="hl_dni_co"></label><br>
-                    <b>Correo: </b><label class="form-check-label" id="hl_correo_co"></label><br>
-                    <b>Telefono: </b><label class="form-check-label" id="hl_telefono_co"></label><br>
-                </div>
-                <div class="col-4">
-                  <h5 class="text-center"><b>Mascota</b></h5>
-                    <b>Nombre: </b><label class="form-check-label" id="hl_mascota_co"></label><br>
-                    <b>Especie: </b><label class="form-check-label" id="hl_especie_co"></label><br>
-                    <b>Sexo: </b><label class="form-check-label" id="hl_sexo_co"></label><br>
-                    <b>Raza: </b><label class="form-check-label" id="hl_raza_co"></label><br>
-                </div>
-                <div class="col-4"><b>
-                    <h5 class="text-center"><b>Veterinario</b></h5>
-                  </b> <b>DNI:</b> <?= $_SESSION['userData']['identificacion']; ?> <br> <b>Nombres:</b> <?= $_SESSION['userData']['nombres'] . ' ' . $_SESSION['userData']['apellidos']; ?>
-                  <br><b>Correo:</b> <?= $_SESSION['userData']['email_user']; ?> <br><b>Telefono:</b> <?= $_SESSION['userData']['telefono']; ?>
-                </div>
-              </div>
+
               <hr>
               <form id="formConsulta" name="formConsulta" class="form-horizontal">
                 <input type="hidden" id="idconsulta" name="idconsulta" value="">
@@ -88,8 +66,13 @@
                 </div>
 
                 <div class="tile-footer">
-                  <button id="btnActionForm" class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText">IMPRIMIR</span></button>&nbsp;&nbsp;&nbsp;
-                  <button id="btnActionForm" class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText">Guardar</span></button>&nbsp;&nbsp;&nbsp;
+                  <a class="btn btn-secondary" id="ImprimirConsulta" href="#"><i class="fa fa-fw fa-lg fa-print"></i>Imprimir</a>&nbsp;&nbsp;&nbsp;
+                  <!-- <?php if ($_SESSION['permisosMod']['u']) { ?>
+                    <button id="btnActionForm" class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText">Guardar</span></button>&nbsp;&nbsp;&nbsp;
+                  <?php } ?> -->
+                  <?php if ($_SESSION['permisosMod']['d']) { ?>
+                    <button id="btnBorrar" class="btn btn-warning" type="submit"><i class="fa fa-fw fa-lg fa-trash-o"></i><span id="btnText">Eliminar</span></button>&nbsp;&nbsp;&nbsp;
+                  <?php } ?>
                   <button class="btn btn-danger" type="button" onclick="cleanModal();" data-dismiss="modal"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cerrar</button>
                 </div>
               </form>
@@ -117,32 +100,10 @@
             <section class="invoice">
               <div class="row">
                 <div class="col-6">
-                  <h5 class="page-header"><small>Veterinario: </small>Frank Quintana Quispe</h5>
+                  <h5 class="page-header"><small>Vacunado por: </small><label id="persona_nom_vacuna"></label></h5>
                 </div>
                 <div class="col-6">
-                  <h5 class="text-right"><small>Fecha: </small> <label class="form-check-label" id="fecha"></h5>
-                </div>
-              </div>
-              <hr>
-              <div class="row invoice-info">
-                <div class="col-4">
-                    <h5 class="text-center"><b>Cliente</b></h5>
-                    <b>Nombre: </b><label class="form-check-label" id="hl_dueño_va"></label><br>
-                    <b>Identificación: </b><label class="form-check-label" id="hl_dni_va"></label><br>
-                    <b>Correo: </b><label class="form-check-label" id="hl_correo_va"></label><br>
-                    <b>Telefono: </b><label class="form-check-label" id="hl_telefono_va"></label><br>
-                </div>
-                <div class="col-4">
-                  <h5 class="text-center"><b>Mascota</b></h5>
-                    <b>Nombre: </b><label class="form-check-label" id="hl_mascota_va"></label><br>
-                    <b>Especie: </b><label class="form-check-label" id="hl_especie_va"></label><br>
-                    <b>Sexo: </b><label class="form-check-label" id="hl_sexo_va"></label><br>
-                    <b>Raza: </b><label class="form-check-label" id="hl_raza_va"></label><br>
-                </div>
-                <div class="col-4"><b>
-                    <h5 class="text-center"><b>Veterinario</b></h5>
-                  </b> <b>DNI:</b> <?= $_SESSION['userData']['identificacion']; ?> <br> <b>Nombres:</b> <?= $_SESSION['userData']['nombres'] . ' ' . $_SESSION['userData']['apellidos']; ?>
-                  <br><b>Correo:</b> <?= $_SESSION['userData']['email_user']; ?> <br><b>Telefono:</b> <?= $_SESSION['userData']['telefono']; ?>
+                  <h5 class="text-right"><small>Fecha: </small> <label class="form-check-label" id="fecha_vacuna"></h5>
                 </div>
               </div>
               <hr>
@@ -151,27 +112,32 @@
                 <input type="hidden" id="idvacuna" name="idvacuna" value="">
                 <div class="row">
                   <div class="form-group col-md-6 text-center">
-                    <label class="control-label"><strong>Vacuna</strong> <span class="required">*</span></label>
+                    <label class="control-label"><strong>Vacuna</strong> </label>
                     <input class="form-control" id="txtVacuna" name="txtVacuna" type="text" required="">
                   </div>
                   <div class="form-group col-md-3 text-center">
-                    <label class="control-label"><strong>Dosis</strong> <span class="required">*</span></label>
+                    <label class="control-label"><strong>Dosis</strong> </label>
                     <input class="form-control" id="txtDosis" name="txtDosis" type="number" required="">
                   </div>
                   <div class="form-group col-md-3 text-center">
-                    <label class="control-label"><strong> Codigo </strong> <span class="required">*</span></label>
+                    <label class="control-label"><strong> Codigo </strong> </label>
                     <input class="form-control" id="txtCodigo" name="txtCodigo" type="number" required="">
                   </div>
                 </div>
                 <div class="row">
                   <div class="form-group col-md-12 text-center">
                     <label class="control-label text-center"><strong>Notas</strong></label>
-                    <textarea class="form-control" id="txtNotas" name="txtNotas" rows="2" placeholder="" ></textarea>
+                    <textarea class="form-control" id="txtNotas" name="txtNotas" rows="2" placeholder=""></textarea>
                   </div>
                 </div>
                 <div class="tile-footer">
-                    <button id="btnActionForm" class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText">Imprimir</span></button>&nbsp;&nbsp;&nbsp;
+                  <a class="btn btn-secondary" id="ImprimirVacuna" href="#"><i class="fa fa-fw fa-lg fa-print"></i>Imprimir</a>&nbsp;&nbsp;&nbsp;
+                  <!-- <?php if ($_SESSION['permisosMod']['u']) { ?>
                     <button id="btnActionForm" class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText">Guardar</span></button>&nbsp;&nbsp;&nbsp;
+                  <?php } ?> -->
+                  <?php if ($_SESSION['permisosMod']['d']) { ?>
+                    <button id="btnBorrar" class="btn btn-warning" type="submit"><i class="fa fa-fw fa-lg fa-trash-o"></i><span id="btnText">Eliminar</span></button>&nbsp;&nbsp;&nbsp;
+                  <?php } ?>
                   <button class="btn btn-danger" type="button" onclick="cleanModal();" data-dismiss="modal"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cerrar</button>
                 </div>
               </form>
@@ -198,7 +164,7 @@
             <section class="invoice">
               <div class="row">
                 <div class="col-6">
-                  <h5 class="page-header"><small>Analisado por: </small><label id="persona_nom_analisis" ></label></h5>
+                  <h5 class="page-header"><small>Analisado por: </small><label id="persona_nom_analisis"></label></h5>
                 </div>
                 <div class="col-6">
                   <h5 class="text-right"><small>Fecha: </small> <label class="form-check-label" id="fecha_analisis"></h5>
@@ -230,11 +196,11 @@
                 </div>
                 <div class="tile-footer">
                   <a class="btn btn-secondary" id="ImprimirAnalisis" href="#"><i class="fa fa-fw fa-lg fa-print"></i>Imprimir</a>&nbsp;&nbsp;&nbsp;
-                  <?php if ($_SESSION['permisosMod']['u']) { ?>
+                  <!-- <?php if ($_SESSION['permisosMod']['u']) { ?>
                     <button id="btnActionForm" class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText">Guardar</span></button>&nbsp;&nbsp;&nbsp;
-                  <?php } ?>
+                  <?php } ?> -->
                   <?php if ($_SESSION['permisosMod']['d']) { ?>
-                    <button id="btnBorrar" class="btn btn-danger" type="submit"><i class="fa fa-fw fa-lg fa-trash-o"></i><span id="btnText">Eliminar</span></button>&nbsp;&nbsp;&nbsp;
+                    <button id="btnBorrar" class="btn btn-warning" type="submit"><i class="fa fa-fw fa-lg fa-trash-o"></i><span id="btnText">Eliminar</span></button>&nbsp;&nbsp;&nbsp;
                   <?php } ?>
                   <button class="btn btn-danger" type="button" onclick="cleanModal();" data-dismiss="modal"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cerrar</button>
                 </div>
@@ -258,7 +224,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <iframe id="idframePDF" name="idframePDF" src="<?=  base_url(); ?>/clientes"  width="100%" height="500" frameborder="1"></iframe>
+        <iframe id="idframePDF" name="idframePDF" src="<?= base_url(); ?>/clientes" width="100%" height="500" frameborder="1"></iframe>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
