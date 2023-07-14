@@ -209,5 +209,28 @@
 			}
 			die();
 		}
+		public function getSelectProductos(int $idcategoria){
+			$htmlOptions = "";
+			$arrData = $this->model->selectProductoProforma($idcategoria);
+			if(count($arrData)>0){
+				$htmlOptions .= '<option value="100" disabled="">Selecciona el producto</option>';
+				for ($i=0; $i <count($arrData); $i++) { 
+					$htmlOptions .= '<option value="'.$arrData[$i]['idproducto'].'" >'.$arrData[$i]['nombre'].'</option>';
+				}
+			}
+			echo $htmlOptions;
+			die();
+		}
+		
+		public function getSelectPrecios(int $idProducto){
+			$arrData = $this->model->obtenerPrecio($idProducto);
+			if(empty($arrData)){
+				$arrResponse = array('status'=>false,'msg'=>'Datos no encontrados.');				
+			}else{
+				$arrResponse = array('status'=>true,'data'=>$arrData);
+			}
+			echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+			die();
+		}
 	}
  ?>
