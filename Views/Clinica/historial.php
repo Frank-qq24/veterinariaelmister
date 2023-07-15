@@ -61,6 +61,19 @@ getModal('modalHistorial', $data);
                     </ul>
                 </div>
             </div>
+            <!--COMENTARIOS-->
+            <div class="tile">
+                <div class="tile-body">
+                    <h3 class="text-center">Comentarios</h3>
+                    <div class="list-group" onclick="openModalComentario()">
+                        <div class="list-group-item list-group-item-action flex-column align-items-start">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1"><!--<?= $comentario ?>-->gaa</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-md-9">
             <div class="row">
@@ -87,10 +100,10 @@ getModal('modalHistorial', $data);
                                 ?>
                                     <div class="card mb-3 list-group-item-action" onclick="fntConsulta(<?= $idconsulta ?>);">
                                         <div class="row">
-                                            <div class="col-md-2">
-                                            <img src="<?= media(); ?>/images/recursos/cosulta2.svg" width="100px">
+                                            <div class="col-md-3">
+                                            <img src="<?= media(); ?>/images/recursos/consulta2.png" style="width: 100%; height: auto;">
                                             </div>
-                                            <div class="col-md-8">
+                                            <div class="col-md-9">
                                                 <div class="card-body">
                                                     <label class="card-title"><small class="text-muted">Motivo:</small> <?= $motivo ?></label><br>
                                                     <label class="card-text"><small class="text-muted">Diagnostivo:</small> <?= $diagnostico ?>.</label><br>

@@ -1,3 +1,56 @@
+<!-- MODAL DE CONSULTA COMENTARIO -->
+<div class="modal fade" id="modalHistorialComentarios" name="modalHistorialComentarios" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header headerRegister">
+        <h5 class="modal-title" id="titleModal">Comentarios</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <section class="invoice">
+              <div class="row">
+                <div class="col-7">
+                  <h2 class="page-header"><i class="fa fa-comments" aria-hidden="true"></i><small> Agregar Comentarios</small></h2>
+                </div>
+                <div class="col-5">
+                  <h6 class="text-right">Fecha: <?php echo date('d/m/Y'); ?></h6>
+                </div>
+              </div>
+              <form id="formConsulta" name="formConsulta" class="form-horizontal">
+                <input type="hidden" id="idconsulta" name="idconsulta" value=""><!-- CAMBIAR VARIABLES -->
+                <input type="hidden" id="idhistorial_consulta" name="idhistorial_consulta" value=""><!-- CAMBIAR VARIABLES -->
+                  <div class="row">
+                    <div class="form-group col-md-12 text-center"><b>
+                      <h5 class="text-center"><b>Comentarios</b></h5>
+                      <div class="list-group">
+                        <div class="list-group-item list-group-item-action flex-column align-items-start">
+                          <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1"><!--<?= $_SESSION['userData']['comentario']; ?>-->gaa</h5>
+                          </div>
+                        </div>
+                          <div class="form-group col-md-12 text-center">
+                            <label class="control-label text-center"><b><br>Nuevos Comentarios</b></span></label>
+                            <textarea class="form-control" id="txtComentario" name="txtComentario" rows="3" placeholder="" required=""></textarea>
+                          </div>
+                          <div class="tile-footer">
+                            <button id="btnActionForm" class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText">Guardar</span></button>&nbsp;&nbsp;&nbsp;
+                            <button class="btn btn-danger" type="button" onclick="cleanModal();" data-dismiss="modal"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cerrar</button>
+                          </div>
+                      </div>
+                  </div>
+              </form>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- MODAL DE CONSULTA MEDICA -->
 <div class="modal fade" id="modalHistorialConsulta" name="modalHistorialConsulta" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg">

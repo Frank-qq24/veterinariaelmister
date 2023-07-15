@@ -55,6 +55,9 @@
                         
                     </a>
                     <ul class="treeview-menu">
+                        <?php if (!empty($_SESSION['permisos'][7]['r'])) { ?>
+                            <li><a class="treeview-item" href="<?= base_url(); ?>/proforma"><i class="icon fa fa-circle-o"></i> Proforma</a></li>
+                        <?php } ?>
                         <?php if (!empty($_SESSION['permisos'][4]['r'])) { ?>
                             <li><a class="treeview-item" href="<?= base_url(); ?>/productos"><i class="icon fa fa-circle-o"></i> Productos</a></li>
                         <?php } ?>
@@ -64,19 +67,7 @@
                     </ul>
                 </li>
             <?php } ?>
-            <?php if (!empty($_SESSION['permisos'][7]['r'])) { ?>
-                <li class="treeview">
-                    <a class="app-menu__item" href="#" data-toggle="treeview">
-                        <i class="app-menu__icon fa fa-archive" aria-hidden="true"></i>
-                        <span class="app-menu__label">Tienda</span>
-                        <i class="treeview-indicator fa fa-angle-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/proforma"><i class="icon fa fa-circle-o"></i> Proforma</a></li>
-                        <li><a class="treeview-item" href="<?= base_url(); ?>/comprobante"><i class="icon fa fa-circle-o"></i> Comprobante de Pago</a></li>
-                    </ul>
-                </li>
-            <?php } ?>
+            
             <?php if (!empty($_SESSION['permisos'][5]['r'])) { ?>
                 <li>
                     <a class="app-menu__item" href="<?= base_url(); ?>/clinica">

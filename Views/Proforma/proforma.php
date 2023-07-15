@@ -24,12 +24,10 @@
                     <table class="table table-hover table-bordered" id="tableProformas">
                       <thead>
                         <tr>
-                          <th>ID</th>
-                          <th>Código</th>
-                          <th>Nombre</th>
-                          <th>Stock</th>
-                          <th>Precio</th>
-                          <th>Estado</th>
+                          <th>Nr°</th>
+                          <th>Atendido por</th>
+                          <th>Total</th>
+                          <th>Fecha</th>
                           <th>Acciones</th>
                         </tr>
                       </thead>

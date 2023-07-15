@@ -10,6 +10,9 @@ function openModalAnalisis(){
 function openModalConsulta(){
     $("#modalHistorialConsulta").modal("show");
 };
+function openModalComentario(){
+    $("#modalHistorialComentarios").modal("show");
+};
 function verPDF_ana(){
     baseURL
     document.getElementById("idframePDF").src = baseURL+"/Assets/documents/uploads/"+rutaPDFanalisis;

@@ -99,5 +99,28 @@
                 echo "Dato no valido";
             }
 		}
+		public function printProforma($idproforma)
+		{
+			if(is_numeric($idproforma)){
+                $data = $this-> model -> selectProforma_All($idproforma);
+                // ob_end_clean();
+                // $hmtl = getFile("Documento/pdfProforma",$data);
+				// $options = new Options();
+				// $options->set(array('isRemoteEnabled' => true));
+				// // $options = $dompdf->getOptions();
+				// $dompdf = new Dompdf();
+				// $dompdf->setOptions($options);
+				// $dompdf->load_html($hmtl);				// $dompdf->setPaper('A4','landscape');
+				// $dompdf->setPaper('A4');
+				// $dompdf->render();
+				// // nombre y descarga de pdf
+				// // $dompdf->stream("archivo_.pdf",array("Attachment"=>true));
+				// $nombre = 'Consulta_'.$idproforma;
+				// $dompdf->stream($nombre,array("Attachment"=>false));
+				$this->views->getView($this,"pdfProforma",$data);
+            }else{
+                echo "Dato no valido";
+            }
+		}
 	}
  ?>

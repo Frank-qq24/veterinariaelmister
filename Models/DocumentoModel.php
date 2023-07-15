@@ -289,4 +289,35 @@
                 return $request;
             }
 		}
+        public function selectProforma_All(int $idproforma){
+			$request = array();
+            // =========================================== Analisis
+			$sql = "SELECT `idproforma`, `personaid`, `total`, `cantidad`, `status`, `clienteid`, `datecreated` as fecha, `ventaid` 
+                    FROM `proforma` 
+                    WHERE idproforma =  $idproforma ";
+			$requestProforma = $this->select($sql);
+            
+			if(!empty($requestProforma)){
+                // =========================================== detalle
+				$sql_detalle = "SELECT * FROM `detalle_pro` WHERE proformaid = $idproforma ";
+				$requestDetalle = $this->select_all($sql_detalle);
+                // =========================================== persona atendio
+                $idPersona = $requestProforma['personaid'];
+				$sql_persona = "SELECT `idpersona`, `identificacion`, `nombres`, `apellidos`, `telefono`, `email_user`, `nit`, `nombrefiscal`, `direccionfiscal`
+                                FROM `persona`
+								WHERE idpersona = $idPersona";
+				$requestPersona = $this->select($sql_persona);
+                // =========================================== Datos de Envio
+				$request = array('proforma' => $requestProforma,
+								'detalle' => $requestDetalle,
+								'persona' => $requestPersona
+								);
+			}
+            if (empty($request)){
+                $request = array('msg' => "Error en busqueda");
+                return $request;
+            }else{
+                return $request;
+            }
+		}
 	}

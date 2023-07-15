@@ -168,22 +168,15 @@
 		}
 		public function selectProductoProforma(int $idcategoria){
 			$this->intIdProducto = intval($idcategoria);
-
 			$sql = "SELECT * FROM producto WHERE categoriaid = '{$this->intIdProducto}' and status != 0";
-
 			$request = $this->select_all($sql);
-
 			return $request;
 		}
 		
 		public function obtenerPrecio(int $idproducto){
-
 			$this->intIdProducto = intval($idproducto);
-
 			$sql = "SELECT * FROM producto WHERE idproducto = '{$this->intIdProducto}'";
-
 			$request = $this->select($sql);
-
 			return $request;
 		}
 		// Para el registro de actividad, usuario es el que esta corriendo actualemente, es decir la persona logeada
