@@ -14,7 +14,8 @@
             <section class="invoice">
               <div class="row">
                 <div class="col-6">
-                  <h2 class="page-header"><i class="fa fa-hospital"></i> CONSULTA MEDICA</h2>
+                  <h5 class="page-header"><i class="fa fa-hospital"></i> CONSULTA MEDICA</h5>
+                  <label class="text-primary">Los campos con asterisco (<span class="required">*</span>) son obligatorios.</label>
                 </div>
                 <div class="col-6">
                   <h5 class="text-right">Fecha: <?php echo date('d/m/Y'); ?></h5>
@@ -22,15 +23,15 @@
               </div>
               <hr>
               <div class="row">
-                <div class="form-group col-md-1">
+                <!-- <div class="form-group col-md-1">
                   <button class="btn btn-outline-secondary" type="button" onclick="openModal2();"><i class="fas fa-plus-circle"></i><small>New</small></button>
-                  <!-- <a href="<?= base_url(); ?>/clientes" class="btn btn-outline-secondary"><small>New</small></a> -->
-                </div>
+                  <a href="<?= base_url(); ?>/clientes" class="btn btn-outline-secondary"><small>New</small></a>
+                </div> -->
                 <div class="form-group col-md-6">
                   <label for="listClientes">Selecciones un cliente, dueño de la mascota <span class="required">*</span></label>
                   <select class="form-control" data-live-search="true" id="listClientes" name="listClientes" onchange="ftnCargarMascotas_consulta()"></select>
                 </div>
-                <div class="form-group col-md-5">
+                <div class="form-group col-md-6">
                   <label for="listMascotas">Selecciona una mascota del cliente <span class="required">*</span></label>
                   <select class="form-control" data-live-search="true" id="listMascotas" name="listMascotas" onchange="ftnCargarIdHistorial_consulta()"></select>
                 </div>
@@ -63,15 +64,15 @@
                 <input type="hidden" id="idhistorial_consulta" name="idhistorial_consulta" value="">
                 <div class="row">
                   <div class="form-group col-md-4 text-center">
-                    <label class="control-label"><strong>Peso</strong> <span class="required">*</span></label>
+                    <label class="control-label"><strong>Peso</strong></label>
                     <input class="form-control" id="txtPeso" name="txtPeso" type="number" min="0" step="0.01">
                   </div>
                   <div class="form-group col-md-4 text-center">
-                    <label class="control-label"><strong>Temperatura</strong> <span class="required">*</span></label>
+                    <label class="control-label"><strong>Temperatura</strong></label>
                     <input class="form-control" id="txtTemperatura" name="txtTemperatura" type="number" min="0" step="0.01">
                   </div>
                   <div class="form-group col-md-4 text-center">
-                    <label class="control-label"><strong> Frecuencia Respiratoria </strong> <span class="required">*</span></label>
+                    <label class="control-label"><strong> Frecuencia Respiratoria </strong></label>
                     <input class="form-control" id="txtRespiracion" name="txtRespiracion" type="number" min="0" step="0.01">
                   </div>
                 </div>
@@ -123,6 +124,7 @@
     <div class="modal-content">
       <div class="modal-header headerRegister">
         <h5 class="modal-title" id="titleModal">FICHA MEDICA</h5>
+        <label class="text-primary">Los campos con asterisco (<span class="required">*</span>) son obligatorios.</label>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -134,6 +136,7 @@
               <div class="row">
                 <div class="col-6">
                   <h5 class="page-header"><i class="fa fa-hospital"></i> VACUNACION</h5>
+                  <label class="text-primary">Los campos con asterisco (<span class="required">*</span>) son obligatorios.</label>
                 </div>
                 <div class="col-6">
                   <h5 class="text-right">Fecha: <?php echo date('d/m/Y'); ?></h5>
@@ -186,8 +189,8 @@
                     <input class="form-control" id="txtDosis" name="txtDosis" type="number" required="">
                   </div>
                   <div class="form-group col-md-3 text-center">
-                    <label class="control-label"><strong> Codigo </strong> <span class="required">*</span></label>
-                    <input class="form-control" id="txtCodigo" name="txtCodigo" type="number" required="">
+                    <label class="control-label"><strong> Codigo </strong></span></label>
+                    <input class="form-control" id="txtCodigo" name="txtCodigo" type="number">
                   </div>
                 </div>
                 <div class="row">
@@ -214,6 +217,7 @@
     <div class="modal-content">
       <div class="modal-header headerRegister">
         <h5 class="modal-title" id="titleModal">ANALISIS MEDICO</h5>
+        <label class="text-primary">Los campos con asterisco (<span class="required">*</span>) son obligatorios.</label>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

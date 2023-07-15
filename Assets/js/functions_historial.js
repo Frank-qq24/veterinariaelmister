@@ -2,17 +2,17 @@ let tableMascotas;
 let rowTable = "";
 let divLoading = document.querySelector("#divLoading");
 let rutaPDFanalisis = "";
-
+document.addEventListener("DOMContentLoaded", function () {
+    fntCreateNota();
+},false);
 function openModalAnalisis(){
-    
+
     $("#modalHistorialAnalisis").modal("show");
 };
 function openModalConsulta(){
     $("#modalHistorialConsulta").modal("show");
 };
-function openModalComentario(){
-    $("#modalHistorialComentarios").modal("show");
-};
+
 function verPDF_ana(){
     baseURL
     document.getElementById("idframePDF").src = baseURL+"/Assets/documents/uploads/"+rutaPDFanalisis;
@@ -37,9 +37,9 @@ function fntViewInfo(idcliente){
                 document.querySelector("#celDireccion").innerHTML = objData.data.direccion;
                 document.querySelector("#celNota").innerHTML = objData.data.nota;
                 $srtEstado = "Inactivo";
-                if(objData.data.status == 1){$srtEstado = "Activo"}; 
+                if(objData.data.status == 1){$srtEstado = "Activo"};
                 document.querySelector("#celStatus").innerHTML = $srtEstado;
-                document.querySelector("#celFechaRegistro").innerHTML = objData.data.fechaRegistro; 
+                document.querySelector("#celFechaRegistro").innerHTML = objData.data.fechaRegistro;
                 $('#modalViewCliente').modal('show');
             }else{
                 swal("Error", objData.msg , "error");
@@ -152,8 +152,137 @@ function fntConsulta(idcon){
         $('#modalHistorialConsulta').modal('show');
     }
 }
-// document.getElementById('myButton').onclick = btnAnalisis;
-// var btnAnalisis = function() {
-    
-//   };
+function openModalComentario(idnota){
+    let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    let ajaxUrl = base_url+'/Clinica/getNota/'+idnota;
+    request.open("GET",ajaxUrl,true);
+    request.send();
+    request.onreadystatechange = function(){
+        if(request.readyState == 4 && request.status == 200){
+            let objData = JSON.parse(request.responseText);
+            if(objData.status)
+            {
+                document.querySelector("#idhistorial_notas").value = objData.data.historialid;
+                // document.querySelector("#idpersona").value = objData.data.historialid;
+                document.querySelector("#idnota").value = objData.data.idnota;
+                document.getElementById('tipoComentario').innerHTML = "Comentario";
+                document.getElementById("txtfecha_comenta").innerText = objData.data.fecha;
+                document.getElementById("txtComentario").innerText = objData.data.nota;
+                $('#btnguardar').hide();
+            }
+        }
+        $("#modalHistorialComentarios").modal("show");
+    }
+};
+function newComentario(hitoria){
+    document.querySelector("#idhistorial_notas").value = hitoria;
+    document.querySelector("#idnota").value = "";
+    document.getElementById('tipoComentario').innerHTML = "Agregar Comentario";
+    document.getElementById("txtfecha_comenta").innerText = "";
+    document.getElementById("txtComentario").innerText ="";
+    $("#modalHistorialComentarios").modal("show");
+    $('#btnEliminar').hide();
+    // document.getElementById('nombre_del_elemento').style.display = 'none';
+};
+function fntCreateNota() {
+    if (document.querySelector("#formNotas")) {
+      let formNota = document.querySelector("#formNotas");
+      formNota.onsubmit = function (e) {
+        e.preventDefault();
+        divLoading.style.display = "flex";
+        let request = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+        let ajaxUrl = base_url + "/Clinica/setNota"; // lo envia esta dirección
+        let formData = new FormData(formNota);
+        request.open("POST", ajaxUrl, true);
+        request.send(formData);
+        request.onreadystatechange = function () {
+          if (request.readyState == 4 && request.status == 200) {
+            let objData = JSON.parse(request.responseText);
+            if (objData.status) {
+              $("#modalHistorialComentarios").modal("hide");
+              formNota.reset();
+              swal("Comentario", objData.msg, "success");
+               location.reload(true);
+            } else {
+              swal("Error", objData.msg, "error");
+            }
+          }
+          divLoading.style.display = "none";
+          return false;
+        };
+      };
+    }
+  }
+
+  function fntDelComentario(id_mascota){
+    idnota = document.querySelector("#idhistorial_notas").value
+    swal({
+        title: "Eliminar el Comentario",
+        text: "¿Realmente quiere eliminar a la Mascota?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Si, eliminar!",
+        cancelButtonText: "No, cancelar!",
+        closeOnConfirm: false,
+        closeOnCancel: true
+    }, function(isConfirm) {
+        if (isConfirm) 
+        {
+            let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+            let ajaxUrl = base_url+'/Clinica/delNota';
+            let strData = "idnota="+idnota;
+            request.open("POST",ajaxUrl,true);
+            request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            request.send(strData);
+            request.onreadystatechange = function(){
+                if(request.readyState == 4 && request.status == 200){
+                    let objData = JSON.parse(request.responseText);
+                    if(objData.status)
+                    {
+                        swal("Eliminado!", objData.msg , "success");
+                    }else{
+                        swal("Atención!", objData.msg , "error");
+                    }
+                }
+            }
+        }
+
+    });
+}
+document.getElementById('myButton').onclick = btnAnalisis;
+var btnAnalisis = function() {
+    idnota = document.querySelector("#idhistorial_notas").value
+    swal({
+        title: "Eliminar el Comentario",
+        text: "¿Realmente quiere eliminar a la Mascota?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Si, eliminar!",
+        cancelButtonText: "No, cancelar!",
+        closeOnConfirm: false,
+        closeOnCancel: true
+    }, function(isConfirm) {
+        if (isConfirm) 
+        {
+            let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+            let ajaxUrl = base_url+'/Clinica/delNota';
+            let strData = "idnota="+idnota;
+            request.open("POST",ajaxUrl,true);
+            request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            request.send(strData);
+            request.onreadystatechange = function(){
+                if(request.readyState == 4 && request.status == 200){
+                    let objData = JSON.parse(request.responseText);
+                    if(objData.status)
+                    {
+                        swal("Eliminado!", objData.msg , "success");
+                    }else{
+                        swal("Atención!", objData.msg , "error");
+                    }
+                }
+            }
+        }
+
+    });
+};
 

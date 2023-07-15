@@ -11,6 +11,7 @@
     <!-- The javascript plugin to display page loading on top-->
     <script src="<?= media(); ?>/js/plugins/pace.min.js"></script>
     <!-- Page specific javascripts-->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <script type="text/javascript" src="<?= media(); ?>/js/plugins/sweetalert.min.js"></script>
     <script type="text/javascript" src="<?= media(); ?>/js/tinymce/tinymce.min.js"></script>
 

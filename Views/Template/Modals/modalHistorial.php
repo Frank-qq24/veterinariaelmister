@@ -14,32 +14,28 @@
             <section class="invoice">
               <div class="row">
                 <div class="col-7">
-                  <h2 class="page-header"><i class="fa fa-comments" aria-hidden="true"></i><small> Agregar Comentarios</small></h2>
+                  <h2 class="page-header" ><i class="fa fa-comments" aria-hidden="true"></i><small id="tipoComentario"> Agregar Comentarios</small></h2>
                 </div>
                 <div class="col-5">
-                  <h6 class="text-right">Fecha: <?php echo date('d/m/Y'); ?></h6>
+                  <h6 class="text-right">Fecha: <label id="txtfecha_comenta"></label></h6>
                 </div>
               </div>
-              <form id="formConsulta" name="formConsulta" class="form-horizontal">
-                <input type="hidden" id="idconsulta" name="idconsulta" value=""><!-- CAMBIAR VARIABLES -->
-                <input type="hidden" id="idhistorial_consulta" name="idhistorial_consulta" value=""><!-- CAMBIAR VARIABLES -->
-                  <div class="row">
-                    <div class="form-group col-md-12 text-center"><b>
-                      <h5 class="text-center"><b>Comentarios</b></h5>
+              <form id="formNotas" name="formNotas" class="form-horizontal">
+                <input type="hidden" id="idnota" name="idnota" value=""><!-- CAMBIAR VARIABLES -->
+                <input type="hidden" id="personaid" name="personaid" value=""><!-- CAMBIAR VARIABLES -->
+                <input type="hidden" id="idhistorial_notas" name="idhistorial_notas" value=""><!-- CAMBIAR VARIABLES -->
+                <div class="row">
+                  <div class="form-group col-md-12 text-center"><b>
                       <div class="list-group">
-                        <div class="list-group-item list-group-item-action flex-column align-items-start">
-                          <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1"><!--<?= $_SESSION['userData']['comentario']; ?>-->gaa</h5>
-                          </div>
+                        
+                        <div class="form-group col-md-12 text-center">
+                          <textarea class="form-control" id="txtComentario" name="txtComentario" rows="3" placeholder="" required=""></textarea>
                         </div>
-                          <div class="form-group col-md-12 text-center">
-                            <label class="control-label text-center"><b><br>Nuevos Comentarios</b></span></label>
-                            <textarea class="form-control" id="txtComentario" name="txtComentario" rows="3" placeholder="" required=""></textarea>
-                          </div>
-                          <div class="tile-footer">
-                            <button id="btnActionForm" class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText">Guardar</span></button>&nbsp;&nbsp;&nbsp;
-                            <button class="btn btn-danger" type="button" onclick="cleanModal();" data-dismiss="modal"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cerrar</button>
-                          </div>
+                        <div class="tile-footer">
+                          <button id="btnguardar" class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText">Guardar</span></button>&nbsp;&nbsp;&nbsp;
+                          <!-- <button id="btnEliminar" class="btn btn-danger" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText">Eliminar</span></button>&nbsp;&nbsp;&nbsp; -->
+                          <button class="btn btn-secondary" type="button" onclick="cleanModal();" data-dismiss="modal"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cerrar</button>
+                        </div>
                       </div>
                   </div>
               </form>
@@ -80,37 +76,37 @@
                 <input type="hidden" id="idhistorial_consulta" name="idhistorial_consulta" value="">
                 <div class="row">
                   <div class="form-group col-md-4 text-center">
-                    <label class="control-label"><strong>PESO</strong></span></label>
+                    <label class="control-label"><strong>PESO</strong></label>
                     <input class="form-control" id="txtPeso" name="txtPeso" type="number" min="0" step="0.01">
                   </div>
                   <div class="form-group col-md-4 text-center">
-                    <label class="control-label"><strong>TEMPERATURA</strong></span></label>
+                    <label class="control-label"><strong>TEMPERATURA</strong></label>
                     <input class="form-control" id="txtTemperatura" name="txtTemperatura" type="number" min="0" step="0.01">
                   </div>
                   <div class="form-group col-md-4 text-center">
-                    <label class="control-label"><strong> Frecuencia Respiratoria </strong></span></label>
+                    <label class="control-label"><strong> Frecuencia Respiratoria </strong></label>
                     <input class="form-control" id="txtRespiracion" name="txtRespiracion" type="number" min="0" step="0.1">
                   </div>
                 </div>
 
                 <div class="row">
                   <div class="form-group col-md-4 text-center">
-                    <label class="control-label text-center"><strong>MOTIVO DE CONSULTA</strong><span class="required">*</span></label>
+                    <label class="control-label text-center"><strong>MOTIVO DE CONSULTA</strong><span class="required"></label>
                     <textarea class="form-control" id="txtMotivo" name="txtMotivo" rows="2" placeholder="Descripcion general" required=""></textarea>
                   </div>
                   <div class="form-group col-md-8 text-center">
-                    <label class="control-label text-center"><strong>ANAMNESIS</strong></span></label>
+                    <label class="control-label text-center"><strong>ANAMNESIS</strong></label>
                     <textarea class="form-control" id="txtAnamnesis" name="txtAnamnesis" rows="2" placeholder="Descripción especificas de las dolencias, sintomas, etc" required=""></textarea>
                   </div>
                 </div>
 
                 <div class="row">
                   <div class="form-group col-md-6 text-center">
-                    <label class="control-label text-center"><strong>DIAGNOSTICO</strong> </span></label>
+                    <label class="control-label text-center"><strong>DIAGNOSTICO</strong> </label>
                     <textarea class="form-control" id="txtDiagnostico" name="txtDiagnostico" rows="3" placeholder="" required=""></textarea>
                   </div>
                   <div class="form-group col-md-6 text-center">
-                    <label class="control-label text-center"><strong>TRATAMIENTO</strong></span></label>
+                    <label class="control-label text-center"><strong>TRATAMIENTO</strong></label>
                     <textarea class="form-control" id="txtTratamiento" name="txtTratamiento" rows="3" placeholder="" required=""></textarea>
                   </div>
                 </div>
@@ -124,7 +120,7 @@
                     <button id="btnActionForm" class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText">Guardar</span></button>&nbsp;&nbsp;&nbsp;
                   <?php } ?> -->
                   <?php if ($_SESSION['permisosMod']['d']) { ?>
-                    <button id="btnBorrar" class="btn btn-warning" type="submit"><i class="fa fa-fw fa-lg fa-trash-o"></i><span id="btnText">Eliminar</span></button>&nbsp;&nbsp;&nbsp;
+                    <!-- <button id="btnBorrar" class="btn btn-warning" type="submit"><i class="fa fa-fw fa-lg fa-trash-o"></i><span id="btnText">Eliminar</span></button>&nbsp;&nbsp;&nbsp; -->
                   <?php } ?>
                   <button class="btn btn-danger" type="button" onclick="cleanModal();" data-dismiss="modal"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cerrar</button>
                 </div>
@@ -189,7 +185,7 @@
                     <button id="btnActionForm" class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText">Guardar</span></button>&nbsp;&nbsp;&nbsp;
                   <?php } ?> -->
                   <?php if ($_SESSION['permisosMod']['d']) { ?>
-                    <button id="btnBorrar" class="btn btn-warning" type="submit"><i class="fa fa-fw fa-lg fa-trash-o"></i><span id="btnText">Eliminar</span></button>&nbsp;&nbsp;&nbsp;
+                    <!-- <button id="btnBorrar" class="btn btn-warning" type="submit"><i class="fa fa-fw fa-lg fa-trash-o"></i><span id="btnText">Eliminar</span></button>&nbsp;&nbsp;&nbsp; -->
                   <?php } ?>
                   <button class="btn btn-danger" type="button" onclick="cleanModal();" data-dismiss="modal"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cerrar</button>
                 </div>
@@ -253,7 +249,7 @@
                     <button id="btnActionForm" class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText">Guardar</span></button>&nbsp;&nbsp;&nbsp;
                   <?php } ?> -->
                   <?php if ($_SESSION['permisosMod']['d']) { ?>
-                    <button id="btnBorrar" class="btn btn-warning" type="submit"><i class="fa fa-fw fa-lg fa-trash-o"></i><span id="btnText">Eliminar</span></button>&nbsp;&nbsp;&nbsp;
+                    <!-- <button id="btnBorrar" class="btn btn-warning" type="submit"><i class="fa fa-fw fa-lg fa-trash-o"></i><span id="btnText">Eliminar</span></button>&nbsp;&nbsp;&nbsp; -->
                   <?php } ?>
                   <button class="btn btn-danger" type="button" onclick="cleanModal();" data-dismiss="modal"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cerrar</button>
                 </div>

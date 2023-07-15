@@ -24,17 +24,19 @@
 		}
 
 		public function historial(int $idmascota) {
-			$data['page_id'] = 5;
+			$data['historia'] = $idmascota;
 			$data['page_tag'] = "Historial";
 			$data['page_title'] = "Historial Clinico de Mascota";
 			$data['page_name'] = "Hitorial";
 			// para el perfil
+			$arrnOTAS = $this->model->selectNotas_hist($idmascota);
+			$data['notas'] = $arrnOTAS;
 			$arrAnalisis = $this->model->selectAnalisis_hist($idmascota);
 			$data['analisis'] = $arrAnalisis;
 			$arrVacunas = $this->model->selectVacuna_hist($idmascota);
 			$data['vacunas'] = $arrVacunas;
-			$arrAnalisis = $this->model->selectConsulta_hist($idmascota);
-			$data['consultas'] = $arrAnalisis;
+			$arrConsulta = $this->model->selectConsulta_hist($idmascota);
+			$data['consultas'] = $arrConsulta;
 			$arrPerfil = $this->model->selectMascota($idmascota);
 			$data['perfil'] = $arrPerfil;
 			$data['page_functions_js'] = "functions_historial.js";
@@ -238,7 +240,54 @@
 			}
 			die();
 		}
+		public function setNota(){
+			// dep($_POST);
+			// exit();
+			if($_POST){
+				if(empty($_POST['txtComentario'])){
+					$arrResponse = array("status" => false, "msg" => 'Datos incorrectos.');
+				}else{ 
+					$intPersonaid = intval($_SESSION['userData']['idpersona']);
+					$nombrePersona = strClean($_SESSION['userData']['nombres']." ".$_SESSION['userData']['apellidos']);
 
+					$idnota = intval($_POST['idnota']);
+					$idHistorial = intval($_POST['idhistorial_notas']);
+					$comentario = strClean($_POST['txtComentario']);
+					
+					if($idnota == 0)
+					{
+						$option = 1;
+						if($_SESSION['permisosMod']['w']){
+							$request_Nota = $this->model->insertNota(	$comentario,
+																			$intPersonaid ,
+																			$idHistorial);
+							// $request_registro = $this->model->setRegistro($nombrePersona, "Cliente", "Crear", $request_user , $intPersonaid);
+						}
+					}else{
+						$option = 2;
+						if($_SESSION['permisosMod']['u']){
+							$request_Nota = $this->model->updateNota($idnota,
+																		$comentario,
+																		$intPersonaid ,
+																		$idHistorial);
+							// $request_registro = $this->model->setRegistro($nombrePersona, "Cliente", "Modificar", $idCliente , $intPersonaid);
+						}
+					}
+
+					if($request_Nota > 0 ){
+						if($option == 1){
+							$arrResponse = array('status' => true, 'msg' => 'Datos guardados correctamente.');
+						}else{
+							$arrResponse = array('status' => true, 'msg' => 'Datos Actualizados correctamente.');
+						}
+					}else{
+						$arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos.');
+					}
+				}
+				echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+			}
+			die();
+		}
 		public function getVacuna($vacuna) {
             if($_SESSION['permisosMod']['r']){
 				$idvacuna = intval($vacuna);
@@ -262,6 +311,23 @@
 				if($idconsulta > 0)
 				{
 					$arrData = $this->model->selectConsulta($idconsulta);
+					if(empty($arrData))
+					{
+						$arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');
+					}else{
+						$arrResponse = array('status' => true, 'data' => $arrData);
+					}
+					echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+				}
+			}
+			die();
+        }
+		public function getNota($Nota) {
+            if($_SESSION['permisosMod']['r']){
+				$idNota = intval($Nota);
+				if($idNota > 0)
+				{
+					$arrData = $this->model->selectNota($idNota);
 					if(empty($arrData))
 					{
 						$arrResponse = array('status' => false, 'msg' => 'Datos no encontrados.');

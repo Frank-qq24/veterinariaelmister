@@ -98,19 +98,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link click-scroll" href="#section_4">Cita(No va)</a>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link click-scroll dropdown-toggle" href="#section_5"
-                            id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">Vizualizar</a>
-
-                        <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
-                            <li><a class="dropdown-item" href="news.html">Clientes</a></li>
-
-                            <li><a class="dropdown-item" href="news-detail.html">Mascotas</a></li>
-                        </ul>
+                        <a class="nav-link click-scroll" href="#section_5">Ubicanos</a>
                     </li>
 
                     <li class="nav-item">
@@ -140,8 +128,6 @@
 
                                     <div class="carousel-caption d-flex flex-column justify-content-end">
                                         <h1>Consultas</h1>
-
-                                        <p>Professional charity theme based on Bootstrap 5.2.2</p>
                                     </div>
                                 </div>
 
@@ -151,8 +137,6 @@
 
                                     <div class="carousel-caption d-flex flex-column justify-content-end">
                                         <h1>Analisis</h1>
-
-                                        <p>You can support us to grow more</p>
                                     </div>
                                 </div>
 
@@ -162,8 +146,7 @@
 
                                     <div class="carousel-caption d-flex flex-column justify-content-end">
                                         <h1>Vacunacion</h1>
-
-                                        <p>Please tell your friends about our website</p>
+                                        <!--<p>Please tell your friends about our website</p>-->
                                     </div>
                                 </div>
                             </div>
@@ -198,7 +181,7 @@
                     <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
                         <div class="featured-block d-flex justify-content-center align-items-center">
                             <a class="d-block">
-                                <img src="<?= media(); ?>/home/images/icons/hands.png" class="featured-block-image img-fluid" alt="">
+                                <img src="<?= media(); ?>/home/images/icons/compromiso.png" class="featured-block-image img-fluid" alt="">
 
                                 <p class="featured-block-text">Compromiso con el <strong>cliente y su mascota</strong></p>
                             </a>
@@ -208,7 +191,7 @@
                     <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0 mb-md-4">
                         <div class="featured-block d-flex justify-content-center align-items-center">
                             <a class="d-block">
-                                <img src="<?= media(); ?>/home/images/icons/heart.png" class="featured-block-image img-fluid" alt="">
+                                <img src="<?= media(); ?>/home/images/icons/comunicacion.png" class="featured-block-image img-fluid" alt="">
 
                                 <p class="featured-block-text"><strong>Comunicación </strong> abierta y transparente</p>
                             </a>
@@ -218,7 +201,7 @@
                     <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0 mb-md-4">
                         <div class="featured-block d-flex justify-content-center align-items-center">
                             <a class="d-block">
-                                <img src="<?= media(); ?>/home/images/icons/receive.png" class="featured-block-image img-fluid" alt="">
+                                <img src="<?= media(); ?>/home/images/icons/cuidado.png" class="featured-block-image img-fluid" alt="">
 
                                 <p class="featured-block-text">Cuidado <strong>compasivo y personalizado</strong></p>
                             </a>
@@ -228,7 +211,7 @@
                     <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
                         <div class="featured-block d-flex justify-content-center align-items-center">
                             <a class="d-block">
-                                <img src="<?= media(); ?>/home/images/icons/scholarship.png" class="featured-block-image img-fluid" alt="">
+                                <img src="<?= media(); ?>/home/images/icons/profesionalismo.png" class="featured-block-image img-fluid" alt="">
 
                                 <p class="featured-block-text"><strong>Profesionalismo </strong> en nuestro empleados</p>
                             </a>
@@ -353,6 +336,9 @@
             </div>
         </section>
 
+        <section class="cta-section section-padding section-bg">
+        </section>
+
         <section class="section-padding" id="section_3">
             <div class="container">
                 <div class="row">
@@ -433,93 +419,32 @@
                 <div class="row">
 
                     <div class="col-lg-6 col-12">
-                        <h2 class="text-white mb-4">Citas</h2>
-
-                        <form class="custom-form volunteer-form mb-5 mb-lg-0" action="#" method="post" role="form">
-                            <h3 class="mb-4">Become a volunteer today</h3>
-
-                            <div class="row">
-                                <div class="col-lg-6 col-12">
-                                    <input type="text" name="volunteer-name" id="volunteer-name" class="form-control"
-                                        placeholder="Jack Doe" required>
-                                </div>
-
-                                <div class="col-lg-6 col-12">
-                                    <input type="email" name="volunteer-email" id="volunteer-email"
-                                        pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Jackdoe@gmail.com"
-                                        required>
-                                </div>
-
-                                <div class="col-lg-6 col-12">
-                                    <input type="text" name="volunteer-subject" id="volunteer-subject"
-                                        class="form-control" placeholder="Subject" required>
-                                </div>
-
-                                <div class="col-lg-6 col-12">
-                                    <div class="input-group input-group-file">
-                                        <input type="file" class="form-control" id="inputGroupFile02">
-
-                                        <label class="input-group-text" for="inputGroupFile02">Upload your CV</label>
-
-                                        <i class="bi-cloud-arrow-up ms-auto"></i>
+                        <h2 class="text-white mb-4">Ubicanos</h2>
+                        <form class="custom-form volunteer-form mb-5 mb-lg-0" method="post" role="form">
+                            <div class="col-lg-12 col-12">
+                            <div class="news-block">
+                                <div class="news-block-top">
+                                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3896.8996958771318!2d-76.776372!3d-12.389647!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91059f250126ab3f%3A0xb2bab0eb4858b855!2sVeterinaria%20El%20Mister!5e0!3m2!1ses-419!2spe!4v1689396590119!5m2!1ses-419!2spe" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                                     </div>
                                 </div>
                             </div>
-
-                            <textarea name="volunteer-message" rows="3" class="form-control" id="volunteer-message"
-                                placeholder="Comment (Optional)"></textarea>
-
-                            <button type="submit" class="form-control">Submit</button>
                         </form>
                     </div>
 
                     <div class="col-lg-6 col-12">
-                        <img src="<?= media(); ?>/home/images/smiling-casual-woman-dressed-volunteer-t-shirt-with-badge.jpg"
-                            class="volunteer-image img-fluid" alt="">
-
                         <div class="custom-block-body text-center">
-                            <h4 class="text-white mt-lg-3 mb-lg-3">About Volunteering</h4>
+                            <h4 class="text-white mt-lg-3 mb-lg-3"><br><br><br><br><br><br>Dudas o Sugerencias</h4>
+                            <p class="text-white">Puedes escribirnos a nuestro Whatsapp con alguna inquietud que tengas o 
+                            para hacernos llegar tus sugerencias.</p>
 
-                            <p class="text-white">Lorem Ipsum dolor sit amet, consectetur adipsicing kengan omeg kohm
-                                tokito Professional charity theme based</p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <section class="news-section section-padding" id="section_5">
-            <div class="container">
-                <div class="row">
-
-                    <div class="col-lg-12 col-12 mb-5">
-                        <h2>Ubicanos</h2>
-                    </div>
-
-                    <div class="col-lg-7 col-12">
-                        <div class="news-block">
-                            <div class="news-block-top">
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3896.899688406679!2d-76.7763725!3d-12.389647499999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91059f250126ab3f%3A0xb2bab0eb4858b855!2sVeterinaria%20El%20Mister!5e0!3m2!1ses-419!2spe!4v1689319858785!5m2!1ses-419!2spe" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-12 mx-auto">
-                        <h2 class="mb-0"><br><br>Dudas o Sugerencias</h2>
-
-                        <p><br>Puedes escribirnos a nuestro Whatsapp con alguna inquietud que tengas o 
-                            para hacernos llegar tus sugerencias.
-                        </p>
-
-                        <button onclick="redirectTo('https://wa.me/51991344308')" type="submit" class="form-control">Escríbenos a nuestro Whatsapp</button>
+                            <button onclick="redirectTo('https://wa.me/51991344308')" type="submit" class="form-control">Escríbenos a nuestro Whatsapp</button>
                         
                             <script>
                             function redirectTo(url) {
                             window.location.href = url;
                             }
                             </script>
-
+                        </div>
                     </div>
 
                 </div>

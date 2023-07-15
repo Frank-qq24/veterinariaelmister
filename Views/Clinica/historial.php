@@ -64,14 +64,33 @@ getModal('modalHistorial', $data);
             <!--COMENTARIOS-->
             <div class="tile">
                 <div class="tile-body">
-                    <h3 class="text-center">Comentarios</h3>
-                    <div class="list-group" onclick="openModalComentario()">
-                        <div class="list-group-item list-group-item-action flex-column align-items-start">
+                    <h3 class="text-center">Comentarios <?php if($_SESSION['permisosMod']['w']){ ?>
+                        <div class="btn btn-primary " type="button" onclick="newComentario(<?= $data['historia'] ?>);" ><i class="fas fa-plus-circle"></i> </div>
+                    <?php } ?> 
+                    </h3>
+                    
+                    <?php
+                    
+                    $notas = $data['notas'];
+                    for ($i = 0; $i < count($notas); $i++) {
+                        $not = $notas[$i];
+                        $idnota = $not["idnota"];
+                        $nota = $not["nota"];
+                        $fechaCompleta = $not["fecha"];
+                        $fecha = date("d/m/Y", strtotime($fechaCompleta));
+                        $usuario = $not["nombres"] . ' ' . $not["apellidos"];
+                    ?>
+                        <div onclick="openModalComentario(<?= $idnota ?>);" class="list-group-item list-group-item-action flex-column align-items-start">
+                            <p class="mb-1">"<?= $nota ?>"</p>
                             <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1"><!--<?= $comentario ?>-->gaa</h5>
+                                <small class="text-muted"><?= $usuario ?></small>
+                                <small class="text-muted"><?= $fecha ?></small>
                             </div>
                         </div>
-                    </div>
+                    <?php
+                    }
+                    ?>
+
                 </div>
             </div>
         </div>
@@ -101,7 +120,7 @@ getModal('modalHistorial', $data);
                                     <div class="card mb-3 list-group-item-action" onclick="fntConsulta(<?= $idconsulta ?>);">
                                         <div class="row">
                                             <div class="col-md-3">
-                                            <img src="<?= media(); ?>/images/recursos/consulta2.png" style="width: 100%; height: auto;">
+                                                <img src="<?= media(); ?>/images/recursos/consulta2.png" style="width: 100%; height: auto;">
                                             </div>
                                             <div class="col-md-9">
                                                 <div class="card-body">
@@ -121,23 +140,6 @@ getModal('modalHistorial', $data);
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <!-- <?php if ($_SESSION['permisosMod']['w']) { ?>
-                        <div class="tile">
-                            <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                                <button type="button" class="btn">Help</button>
-                                <div class="btn-group" role="group">
-                                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                        AGREGAR NUEVA
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <button class="dropdown-item" href="#">Consulta</button>
-                                        <button class="dropdown-item" href="#">Analisis</button>
-                                        <button class="dropdown-item" href="#">Vacuna</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    <?php } ?> -->
                     <div class="tile">
                         <div class="tile-body">
                             <h3 class="text-center">Analisis</h3>
@@ -154,7 +156,7 @@ getModal('modalHistorial', $data);
                                     $diagnostico = $ana["diagnostico"];
                                     $medico = $ana["nombres"] . ' ' . $ana["apellidos"];
                                     $ruta = $ana["rutafile"];
-                                    $direc = '/Assets/documents/uploads/'. $ruta ;
+                                    $direc = '/Assets/documents/uploads/' . $ruta;
                                 ?>
                                     <div onclick="fntAnalisis(<?= $idanalisis ?>);" class="list-group-item list-group-item-action flex-column align-items-start">
                                         <div class="d-flex w-100 justify-content-between">

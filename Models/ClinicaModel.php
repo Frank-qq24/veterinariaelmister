@@ -175,7 +175,76 @@
 			$request = $this->select($sql);
 			return $request;
 		}
-
+        // -------------------------------MODELOS PARA NOTAS--------------------------------- //
+        private $intIDnotas;
+        // private $strNota;
+        public function insertNota(string $nota, int $persona, int $historia){
+            $this->strNota = $nota;
+            $this->intPersonaID = $persona;
+            $this->intHistorialID = $historia;
+			$query_insert = "INSERT INTO `notas`(`nota`, `personaid`, `historialid`) 
+                    VALUES (?,?,?)";
+			$arrData = array($this->strNota,
+                            $this->intPersonaID,
+                            $this->intHistorialID
+                        );
+			$request_insert = $this->insert($query_insert, $arrData);
+			$return = $request_insert;
+			return $return;
+		}
+        public function selectNotas(){
+			$sql = "SELECT `idnota`, `nota`, `personaid`, `historialid`, `datecreated` as fecha, `updated` FROM `notas` WHERE 1";
+			$request = $this->select_all($sql);
+			return $request;
+		}
+        public function selectNotas_hist(int $idhistorial){
+            $this->intHistorialID =$idhistorial;
+			$sql = "SELECT
+                        n.idnota,
+                        n.nota,
+                        n.personaid,
+                        n.historialid,
+                        n.datecreated as fecha,
+                        p.idpersona,
+                        p.nombres,
+                        p.apellidos
+                    FROM
+                        notas n
+                    INNER JOIN persona p ON
+                        n.personaid = p.idpersona
+                    WHERE
+                        n.historialid =  $this->intHistorialID
+                    ORDER BY n.datecreated DESC";
+			$request = $this->select_all($sql);
+			return $request;
+		}
+        public function deleteNota(int $idnota)
+		{
+			$this->intIDnotas = $idnota;
+			$sql = "DELETE FROM `notas` WHERE idnota = $this->intIDnotas ";
+			$request = $this->delete($sql);
+			return $request;
+		}
+        public function selectNota(int $consultaid){
+            $this->intIdconsulta =$consultaid;
+			$sql = "SELECT
+                        n.idnota,
+                        n.nota,
+                        n.personaid,
+                        n.historialid,
+                        DATE_FORMAT(n.datecreated, '%Y-%m-%d') as fecha,
+                        p.idpersona,
+                        p.nombres,
+                        p.apellidos
+                    FROM
+                        notas n
+                    INNER JOIN persona p ON
+                        n.personaid = p.idpersona
+                    WHERE
+                        n.idnota =  $this->intIdconsulta";
+			$request = $this->select($sql);
+			return $request;
+		}
         // ============================================= MODELOS GENERALES==================================================== //
         private $intIdmascota;
         public function selectMascota(int $idMascota){

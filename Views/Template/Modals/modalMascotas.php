@@ -14,24 +14,11 @@
           <input type="hidden" id="foto_actual" name="foto_actual" value="">
           <input type="hidden" id="foto_remove" name="foto_remove" value="0">
           <p class="text-primary">Los campos con asterisco (<span class="required">*</span>) son obligatorios.</p>
+          
           <hr>
           <div class="row">
+            
             <div class="form-group col-md-12">
-              <h5 class="text-center lead">Dueño</h5>
-            </div>
-
-          </div>
-          <div class="row">
-            <div class="form-group col-md-1">
-              <button class="btn btn-outline-secondary" type="button" onclick="openModal2();"><i class="fas fa-plus-circle"></i><small>New</small></button>
-              <!-- <a href="<?= base_url(); ?>/clientes" class="btn btn-outline-secondary"><small>New</small></a> -->
-            </div>
-            <div class="form-group col-md-5">
-              <label for="">Buscar Clientes <span class="required">*</span></label>
-              <input class="form-control" type="text" placeholder="Busca Cliente, dueño de la nueva mascota">
-
-            </div>
-            <div class="form-group col-md-6">
               <label for="listClientes">Selecciones un cliente, dueño de la mascota <span class="required">*</span></label>
               <select class="form-control" data-live-search="true" id="listClientes" name="listClientes" required=""></select>
             </div>

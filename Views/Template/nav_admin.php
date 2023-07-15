@@ -12,7 +12,7 @@
                 <li>
                     <a class="app-menu__item" href="<?= base_url(); ?>/dashboard">
                         <i class="app-menu__icon fa fa-dashboard"></i>
-                        <span class="app-menu__label">Dashboard</span>
+                        <span class="app-menu__label">Inicio</span>
                     </a>
                 </li>
             <?php } ?>
